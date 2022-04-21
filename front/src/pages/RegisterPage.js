@@ -1,5 +1,12 @@
 import React from "react";
 
+import Header from "../components/Header";
+
 export default function RegisterPage() {
-  return <div>RegisterPage</div>;
+  return (
+    <>
+      <Header />
+      <div>RegisterPage</div>
+    </>
+  );
 }
