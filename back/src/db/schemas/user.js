@@ -1,4 +1,5 @@
-import { Schema, model } from "mongoose";
+import pkg from "mongoose";
+const { Schema, model } = pkg;
 
 const UserSchema = new Schema(
   {
@@ -25,14 +26,15 @@ const UserSchema = new Schema(
     },
     admin: {
       type: Boolean,
-      default : false,
+      default: false,
     },
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 const UserModel = model("User", UserSchema);
-
 export { UserModel };
+
+//UserModel (DB연결완료)
