@@ -1,6 +1,7 @@
 import cors from "cors";
 import express from "express";
 
+
 const app = express();
 // CORS 에러 방지
 app.use(cors());
