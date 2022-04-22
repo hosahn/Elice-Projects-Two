@@ -1,5 +1,12 @@
 import React from "react";
 
+import Header from "../components/Header";
+
 export default function WorldMapPage() {
-  return <div>WorldMapPage</div>;
+  return (
+    <>
+      <Header />
+      <div>WorldMapPage</div>
+    </>
+  );
 }

@@ -17,8 +17,8 @@ function App() {
         <Route path="/detail" exact element={<DetailPage />} />
         <Route path="/world_map" exact element={<WorldMapPage />} />
         <Route path="/about" exact element={<AboutPage />} />
-        <Route path="/login" exact element={<LoginPage />} />
-        <Route path="/register" exact element={<RegisterPage />} />
+        <Route path="/user/login" exact element={<LoginPage />} />
+        <Route path="/user/register" exact element={<RegisterPage />} />
       </Routes>
     </Router>
   );
