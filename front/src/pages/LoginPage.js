@@ -24,7 +24,7 @@ export default function LoginPage() {
         >
           Login
         </Typography>
-        <TextField label="id" type="text"></TextField>
+        <TextField label="email" type="email"></TextField>
         <br />
         <TextField label="pw" type="password"></TextField>
         <br />
