@@ -1,56 +1,63 @@
 import { WineModel } from "../schemas/wine.js";
 
 class Wine {
-  // 수상 내역을 새로 생성합니다.
-  static async getSixofRandWines({}) {
-    const wines = await WineModel.aggregate([{ $sample: { size: 6 } }]);  // ! 이렇게 작성해도 되는지 의문
+  // 모든 데이터를 불러오는 방법
+  static async findAll() {
+    const wines = await WineModel.find({});
     return wines;
   }
-  static create({ newAward }) {
-    return AwardModel.create(newAward);
+
+  // 원래 getAnyWines에 연결하려고 했습니다
+  static async getSixofRandWines() {
+    const wines = await WineModel.aggregate([{ $sample: { size: 6 } }]); // ! 이렇게 작성해도 되는지 의문
+    return wines;
   }
 
-  static FindByWineName({ wineName }) {
-    return WineModel.find({ title: wineName });
-  }
+  // static create({ newAward }) {
+  //   return AwardModel.create(newAward);
+  // }
 
-  // 수상 내역의 title을 기준으로 검색
-  static getAwardName({ user_id, title }) {
-    return AwardModel.findOne({ user_id, title });
-  }
+  // static FindByWineName({ wineName }) {
+  //   return WineModel.find({ title: wineName });
+  // }
 
-  // 사용자 id로 수상 내역 찾기
-  static findById({ awardId }) {
-    return AwardModel.find({ id: awardId });
-  }
+  // // 수상 내역의 title을 기준으로 검색
+  // static getAwardName({ user_id, title }) {
+  //   return AwardModel.findOne({ user_id, title });
+  // }
 
-  // 사용자 id를 사용해서 사용자의 모든 수상 내역을 가져오기
-  static findByUserId({ user_id }) {
-    return AwardModel.find({ user_id });
-  }
+  // // 사용자 id로 수상 내역 찾기
+  // static findById({ awardId }) {
+  //   return AwardModel.find({ id: awardId });
+  // }
 
-  // 수상 내역 수정하기
-  static async update({ id, fieldToUpdate, newValue }) {
-    const filter = { id };
-    const update = { [fieldToUpdate]: newValue };
-    const option = { returnOriginal: false };
+  // // 사용자 id를 사용해서 사용자의 모든 수상 내역을 가져오기
+  // static findByUserId({ user_id }) {
+  //   return AwardModel.find({ user_id });
+  // }
 
-    const updateAward = await AwardModel.findOneAndUpdate(
-      filter,
-      update,
-      option,
-    );
-    return updateAward;
-  }
+  // // 수상 내역 수정하기
+  // static async update({ id, fieldToUpdate, newValue }) {
+  //   const filter = { id };
+  //   const update = { [fieldToUpdate]: newValue };
+  //   const option = { returnOriginal: false };
 
-  static delete({ id, user_id }) {
-    return AwardModel.deleteOne({ id, user_id });
-  }
+  //   const updateAward = await AwardModel.findOneAndUpdate(
+  //     filter,
+  //     update,
+  //     option,
+  //   );
+  //   return updateAward;
+  // }
 
-  static async findByCountry({ countryName }) {
-    const result = await WineModel.find({ country: countryName });
-    return result;
-  }
+  // static delete({ id, user_id }) {
+  //   return AwardModel.deleteOne({ id, user_id });
+  // }
+
+  // static async findByCountry({ countryName }) {
+  //   const result = await WineModel.find({ country: countryName });
+  //   return result;
+  // }
 }
 
 export { Wine };
