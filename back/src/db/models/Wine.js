@@ -1,4 +1,4 @@
-import { WineModel } from "../schemas/wine";
+import { WineModel } from "../schemas/wine.js";
 
 class Wine {
   // 수상 내역을 새로 생성합니다.
@@ -6,8 +6,8 @@ class Wine {
     return AwardModel.create(newAward);
   }
 
-  static FindByWineName({wineName}){
-      return WineModel.find({title : wineName})
+  static FindByWineName({ wineName }) {
+    return WineModel.find({ title: wineName });
   }
 
   // 수상 내역의 title을 기준으로 검색
@@ -42,6 +42,11 @@ class Wine {
   static delete({ id, user_id }) {
     return AwardModel.deleteOne({ id, user_id });
   }
+
+  static async findByCountry({ countryName }) {
+    const result = await WineModel.find({ country: countryName });
+    return result;
+  }
 }
 
-export { Award };
+export { Wine };
