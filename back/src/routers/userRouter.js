@@ -3,6 +3,7 @@ import { Router } from "express";
 import { userAuthService } from "../services/userService.js";
 
 const userRouter = Router();
+
 userRouter.post("/user/register", async function (req, res, next) {
   console.log(req.body.name);
   try {

@@ -1,25 +1,43 @@
 import { Router } from "express";
-import { mainWineService } from "../services/mainService";
+import { mainWineService } from "../services/mainService.js";
 
 const mainRouter = Router();
 
 // main 페이지에서 randomly 와인 6개 정보 제공
 mainRouter.get("/main", async function (req, res) {
   try {
-    // 6개 랜덤으로 받아와서 반환 <- 일단 다 받아오게 해두었으나 postman 오류
     const randSelected = await mainWineService.getAnyWines();
-    res.status(200).send(randSelected);
+    res.status(200).json(randSelected); // json 형태로 제공됩니다.
+    // * 필드: id, "", country, description, designation, points, price, province, region_1, taster_name, taster_twitter_handel, title, variety, winery
+    // ! 이 중에 id, title, country, description, points, price만 가지고 오면 될까요
   } catch (e) {
     res.status(400).send(e);
   }
 });
 
-// mainRouter.get("/main/search", async function (req, res) {
-//     try{
+mainRouter.get("/main/search", async function (req, res) {
+  // req.body: title, min/maxPrice, min/maxPoints, tags
+  try {
+    // 선택하지 않은 경우 빈문자열로 입력
+    const tags = req.body.tags;
+    const minPrice = req.body.minPrice;
+    const maxPrice = req.body.maxPrice;
+    const minPoints = req.body.minPoints;
+    const maxPoints = req.body.maxPoints;
 
-//     } catch(e) {
+    const searchedWines = await mainWineService.getWines({
+      tags,
+      minPrice,
+      maxPrice,
+      minPoints,
+      maxPoints,
+    });
 
-//     }
-// });
+    if (searchedWines.errorMessage) {
+      throw new Error(searchedWines.errorMessage);
+    }
+    res.status(200).json(searchedWines);
+  } catch (e) {}
+});
 
 export { mainRouter };

@@ -1,15 +1,15 @@
 import { WineModel } from "../schemas/wine.js";
 
 class Wine {
-  // 모든 데이터를 불러오는 방법
+  // 모든 데이터를 불러오기
   static async findAll() {
     const wines = await WineModel.find({});
     return wines;
   }
 
-  // 원래 getAnyWines에 연결하려고 했습니다
+  // 데이터 6개를 랜덤하게 받아오기
   static async getSixofRandWines() {
-    const wines = await WineModel.aggregate([{ $sample: { size: 6 } }]); // ! 이렇게 작성해도 되는지 의문
+    const wines = await WineModel.aggregate([{ $sample: { size: 6 } }]); 
     return wines;
   }
 
