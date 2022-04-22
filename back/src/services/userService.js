@@ -14,6 +14,7 @@ class userAuthService {
         "이 이메일은 현재 사용중입니다. 다른 이메일을 입력해 주세요.";
       return { errorMessage };
     }
+
     // 비밀번호 해쉬화
     const hashedPassword = await bcrypt.hash(password, 10);
     // id 는 유니크 값 부여
@@ -51,13 +52,13 @@ class userAuthService {
     // 반환할 loginuser 객체를 위한 변수 설정
     const id = user.id;
     const name = user.name;
-    const description = user.description;
+    const tier = user.tier;
     const loginUser = {
       token,
       id,
       email,
       name,
-      description,
+      tier,
       errorMessage: null,
     };
     return loginUser;
@@ -91,9 +92,9 @@ class userAuthService {
       user = await User.update({ user_id, fieldToUpdate, newValue });
     }
 
-    if (toUpdate.description) {
-      const fieldToUpdate = "description";
-      const newValue = toUpdate.description;
+    if (toUpdate.tier) {
+      const fieldToUpdate = "tier";
+      const newValue = toUpdate.tier;
       user = await User.update({ user_id, fieldToUpdate, newValue });
     }
     return user;
