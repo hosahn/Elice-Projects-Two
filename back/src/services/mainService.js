@@ -1,7 +1,10 @@
-import { Wine } from "../db";
+import { Wine } from "../db/models";
 
-class name {
-  static async functionname({ val }) {}
+class mainWineService {
+  static async getAnyWines({}) {
+    const wines = await Wine.getSixofRandWines({});
+    return wines;
+  }
 }
 
 export { mainWineService };

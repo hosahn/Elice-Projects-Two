@@ -2,6 +2,10 @@ import { WineModel } from "../schemas/wine.js";
 
 class Wine {
   // 수상 내역을 새로 생성합니다.
+  static async getSixofRandWines({}) {
+    const wines = await WineModel.aggregate([{ $sample: { size: 6 } }]);  // ! 이렇게 작성해도 되는지 의문
+    return wines;
+  }
   static create({ newAward }) {
     return AwardModel.create(newAward);
   }
