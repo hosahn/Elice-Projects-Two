@@ -1,13 +1,15 @@
 import { Wine } from "../db/index.js";
+import { Country } from "../db/index.js";
 
 class worldService {
-  static async findByCountry({ countryName }) {
+  static async findByCountryWine({ countryName }) {
     const result = await Wine.findByCountry({ countryName });
-    console.log(result.length);
+    return [result[0], result[1], result[2]];
   }
 
-  static async findByRegion({ regionName }) {
-    const result = await Wine.findByRegion({ regionName });
+  static async findByCountryDescription({ countryName }) {
+    const result = await Country.findByCountryName({ countryName });
+    return result;
   }
 }
 export { worldService };

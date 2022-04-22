@@ -43,8 +43,9 @@ class Wine {
     return AwardModel.deleteOne({ id, user_id });
   }
 
-  static findByCountryName({ countryName }) {
-    const result = WineModel.findAll({ country: countryName });
+  static async findByCountry({ countryName }) {
+    const result = await WineModel.find({ country: countryName });
+    return result;
   }
 }
 
