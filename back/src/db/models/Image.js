@@ -11,13 +11,16 @@ class Url {
     return sixWine;
   }
 
-  static async findByWineName({ wines }) {
-    const length = wines.length;
+  static async findByWineName({ wineNames }) {
+    const length = wineNames.length;
+    console.log(length);
     const result = [];
-    for (i = 0; i < length; i++) {
-      tmpUrl = await UrlModel.find({ wine: wines[i] });
+    for (let i = 0; i < length; i++) {
+      console.log(i);
+      const tmpUrl = await UrlModel.findOne({ wine: wineNames[i] });
       result.push(tmpUrl);
     }
+    console.log(result);
     return result;
   }
 }

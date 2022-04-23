@@ -3,9 +3,9 @@ import { worldService } from "../services/worldService.js";
 
 const worldRouter = Router();
 
-worldRouter.get("/world_map/:country", async (req, res, next) => {
+worldRouter.get("/world_map", async (req, res, next) => {
   try {
-    const countryName = req.params.country;
+    const countryName = req.body.country;
 
     if (!countryName) {
       throw new Error("요청하신 정보를 찾을 수 없습니다.");
@@ -16,8 +16,13 @@ worldRouter.get("/world_map/:country", async (req, res, next) => {
       countryName,
     });
 
-    const urls = await worldService.findByWineUrl({ wines });
-    if (!wines || !countryDescription) {
+    const wineNames = [];
+    for (let i = 0; i < 3; i++) {
+      wineNames.push(wines[i].title);
+    }
+
+    const urls = await worldService.findByWineUrl({ wineNames });
+    if (!wineNames || !countryDescription) {
       throw new Error("요청하신 정보를 찾을 수 없습니다.");
     } //찾고자 하는 나라의 정보/와인이 하나도 없다면 에러 발생
 
