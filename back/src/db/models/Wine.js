@@ -9,32 +9,28 @@ class Wine {
 
   // 데이터 6개를 랜덤하게 받아오기
   static async getSixofRandWines() {
-    const wines = await WineModel.aggregate([{ $sample: { size: 6 } }]); 
+    const wines = await WineModel.aggregate([{ $sample: { size: 6 } }]);
     return wines;
   }
 
-  // static create({ newAward }) {
-  //   return AwardModel.create(newAward);
+  //static async findWines({ tags, minPrice, maxPrice, minPoints, maxPoints }) {}
+
+  // static async findByTags({ tags }) {
+  //   for (tag in tags) {
+  //     const result = await WineModel.find({
+  //       description: { $regex: tag, $options: "i" },
+  //     });
+  //   }
+  //   return WineModel.find;
   // }
 
-  // static FindByWineName({ wineName }) {
-  //   return WineModel.find({ title: wineName });
-  // }
-
-  // // 수상 내역의 title을 기준으로 검색
-  // static getAwardName({ user_id, title }) {
-  //   return AwardModel.findOne({ user_id, title });
-  // }
-
-  // // 사용자 id로 수상 내역 찾기
-  // static findById({ awardId }) {
-  //   return AwardModel.find({ id: awardId });
-  // }
-
-  // // 사용자 id를 사용해서 사용자의 모든 수상 내역을 가져오기
-  // static findByUserId({ user_id }) {
-  //   return AwardModel.find({ user_id });
-  // }
+  // price로 검색
+  static async findByPrice({ minPrice, maxPrice }) {
+    const wines = await WineModel.find({
+      price: { $gte: minPrice, $lte: maxPrice },
+    });
+    return wines;
+  }
 
   // // 수상 내역 수정하기
   // static async update({ id, fieldToUpdate, newValue }) {
