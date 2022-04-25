@@ -47,6 +47,11 @@ class Wine {
     const result = await WineModel.find({ country: countryName });
     return result;
   }
+
+  static async findByIndex({ index }) {
+    const result = await WineModel.find({ index: index });
+    return result;
+  }
 }
 
 export { Wine };

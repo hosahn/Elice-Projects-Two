@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { worldService } from "../services/worldService.js";
-
+import { errorMiddleware } from "../middlewares/errorMiddleware.js";
 const worldRouter = Router();
 
-worldRouter.get("/world_map", async (req, res, next) => {
+worldRouter.get("/worldMap", async (req, res, next) => {
   try {
     const countryName = req.body.country;
 
@@ -38,3 +38,25 @@ worldRouter.get("/world_map", async (req, res, next) => {
   }
 });
 export { worldRouter };
+
+worldRouter.get(
+  "/worldMapNew",
+  async (req, res, next) => {
+    //DB 통합 후 사용할 함수입니다.
+    try {
+      const countryName = req.body.country;
+      if (!countryName) {
+        throw new Error("요청하신 정보를 찾을 수 없습니다.");
+      } //CountryName은 필수로 와야하는 정보
+      const wines = await worldService.findByCountryWine({ countryName });
+      //wines에서 추출할 정보 : 와인 이름, 태그, 이미지url
+      const countryDescription = await worldService.findByCountryDescription({
+        countryName,
+      }); //countryDescription에서 추출할 정보 : description
+      result = { wine: wines, description: countryDescription };
+    } catch (e) {
+      res.send(404);
+    }
+  },
+  errorMiddleware,
+);
