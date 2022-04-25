@@ -7,7 +7,7 @@ const UrlSchema = new Schema(
       type: String,
       required: true,
     },
-    description: {
+    wine: {
       type: String,
       required: true,
     },
