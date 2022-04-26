@@ -31,29 +31,13 @@ class Wine {
     });
     return wines;
   }
-
-  // // 수상 내역 수정하기
-  // static async update({ id, fieldToUpdate, newValue }) {
-  //   const filter = { id };
-  //   const update = { [fieldToUpdate]: newValue };
-  //   const option = { returnOriginal: false };
-
-  //   const updateAward = await AwardModel.findOneAndUpdate(
-  //     filter,
-  //     update,
-  //     option,
-  //   );
-  //   return updateAward;
-  // }
-
-  // static delete({ id, user_id }) {
-  //   return AwardModel.deleteOne({ id, user_id });
-  // }
-
-  // static async findByCountry({ countryName }) {
-  //   const result = await WineModel.find({ country: countryName });
-  //   return result;
-  // }
+  // points로 검색
+  static async findByPoints({ minPoints, maxPoints }) {
+    const wines = await WineModel.find({
+      points: { $gte: minPoints, $lte: maxPoints },
+    });
+    return wines;
+  }
 }
 
 export { Wine };

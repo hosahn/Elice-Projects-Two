@@ -7,6 +7,7 @@ const mainRouter = Router();
 mainRouter.get("/", (req, res) => {
   res.send("index page");
 });
+
 mainRouter.get("/main", async function (req, res) {
   try {
     const randSelected = await mainWineService.getAnyWines();
@@ -57,4 +58,17 @@ mainRouter.get("/main/price", async function (req, res) {
     res.status(404).send(e);
   }
 });
+
+mainRouter.get("/main/points", async function (req, res) {
+  try {
+    const minPoints = req.body.minPoints;
+    const maxPoints = req.body.maxPoints;
+    const wines = await mainWineService.findByPoints({ minPoints, maxPoints });
+    res.status(200).json(wines);
+  } catch (e) {
+    res.status(404).send(e);
+  }
+});
+
+
 export { mainRouter };
