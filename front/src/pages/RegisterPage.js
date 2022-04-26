@@ -8,6 +8,7 @@ import Alert from "../components/Alert";
 
 export default function RegisterPage() {
   const navigate = useNavigate();
+
   const [user, setUser] = useState({
     email: "",
     name: "",
@@ -20,6 +21,20 @@ export default function RegisterPage() {
     title: "",
     message: "",
   });
+
+  const validateEmail = email => {
+    return email
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      );
+  };
+
+  const isEmailValid = validateEmail(user.email);
+  const isPasswordValid = user.password.length >= 4;
+  const isNameValid = user.name.length >= 2;
+
+  const isFormValid = isEmailValid && isPasswordValid && isNameValid;
 
   const handleValueChange = (name, value) => {
     setUser(prev => ({ ...prev, [name]: value }));
@@ -88,6 +103,9 @@ export default function RegisterPage() {
           label="email"
           type="email"
           onChange={e => handleValueChange("email", e.target.value)}
+          helperText={
+            validateEmail(user.email) ? "" : "이메일 양식에 맞지 않습니다."
+          }
         ></TextField>
         <br />
         <TextField
@@ -108,7 +126,7 @@ export default function RegisterPage() {
           onChange={e => handleValueChange("rePassword", e.target.value)}
         ></TextField>
         <br />
-        <Button variant="outlined" type="submit">
+        <Button variant="outlined" type="submit" disabled={!isFormValid}>
           Register
         </Button>
       </form>
