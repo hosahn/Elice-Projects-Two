@@ -13,6 +13,10 @@ class Wine {
     return wines;
   }
 
+  static async findWines({ tags, minPrice, maxPrice, minPoints, maxPoints }) {
+    // 1 or 2 or 3   x = math.randint(1,3) tmpTag =  array[x]; Wine.find({description : tmpTag})
+  }
+
   //static async findWines({ tags, minPrice, maxPrice, minPoints, maxPoints }) {}
 
   // static async findByTags({ tags }) {
