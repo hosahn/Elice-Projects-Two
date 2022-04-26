@@ -28,14 +28,14 @@ class Wine {
   static async findByPrice({ minPrice, maxPrice }) {
     const wines = await WineModel.find({
       price: { $gte: minPrice, $lte: maxPrice },
-    });
+    }).limit(3);
     return wines;
   }
   // points로 검색
   static async findByPoints({ minPoints, maxPoints }) {
     const wines = await WineModel.find({
       points: { $gte: minPoints, $lte: maxPoints },
-    });
+    }).limit(3);
     return wines;
   }
 }
