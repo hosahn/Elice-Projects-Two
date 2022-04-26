@@ -8,7 +8,7 @@ class Wine {
   }
 
   static async findByCountry({ countryName }) {
-    const result = await WineModel.findOne({ country: countryName });
+    const result = await WineModel.find({ country: countryName });
     return result;
   }
 
