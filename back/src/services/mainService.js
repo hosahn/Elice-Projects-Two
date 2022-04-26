@@ -40,10 +40,16 @@ class mainWineService {
     return wines;
   }
 
-  // query test를 위한 코드
+  // * (이하) query test를 위한 코드
   static async findByPrice({ minPrice, maxPrice }) {
     const wines = await Wine.findByPrice({ minPrice, maxPrice });
     return wines;
   }
+
+  static async findByPoints({ minPoints, maxPoints }) {
+    const wines = await Wine.findByPoints({ minPoints, maxPoints });
+    return wines;
+  }
 }
+
 export { mainWineService };

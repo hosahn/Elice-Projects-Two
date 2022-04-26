@@ -3,6 +3,10 @@ const { Schema, model } = pkg;
 
 const WineSchema = new Schema(
   {
+    index: {
+      type: Number,
+      required: true,
+    },
     country: {
       type: String,
       required: true,
@@ -16,18 +20,50 @@ const WineSchema = new Schema(
       required: true,
     },
     points: {
-      type: Number,
+      type: String,
       required: true,
     },
     price: {
-      type: Number,
+      type: String,
+      required: true,
+    },
+    province: {
+      type: String,
       required: true,
     },
     variety: {
       type: String,
       required: true,
     },
-    imageUrl: {
+    winery: {
+      type: String,
+      required: true,
+    },
+    keyword: {
+      type: Array,
+      required: true,
+    },
+    image: {
+      type: String,
+      required: true,
+    },
+    snack1: {
+      type: String,
+      required: true,
+    },
+    snack2: {
+      type: String,
+      required: true,
+    },
+    similar1: {
+      type: String,
+      required: true,
+    },
+    similar2: {
+      type: String,
+      required: true,
+    },
+    similar3: {
       type: String,
       required: true,
     },
