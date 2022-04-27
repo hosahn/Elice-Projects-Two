@@ -70,5 +70,14 @@ mainRouter.get("/main/points", async function (req, res) {
   }
 });
 
+mainRouter.get("/main/tags", async function (req, res) {
+  try {
+    const tags = req.body.tags;
+    const wines = await mainWineService.findByTags({ tags });
+    res.status(200).json(wines);
+  } catch (e) {
+    res.status(404).send(e);
+  }
+});
 
 export { mainRouter };

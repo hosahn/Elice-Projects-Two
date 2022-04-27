@@ -50,6 +50,11 @@ class mainWineService {
     const wines = await Wine.findByPoints({ minPoints, maxPoints });
     return wines;
   }
+
+  static async findByTags({ tags }) {
+    const wines = await Wine.findByTags({ tags });
+    return wines;
+  }
 }
 
 export { mainWineService };
