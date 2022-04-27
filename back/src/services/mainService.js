@@ -55,6 +55,11 @@ class mainWineService {
     const wines = await Wine.findByTags({ tags });
     return wines;
   }
+
+  static async findByTagString({ tag }) {
+    const wines = await Wine.findByTagString({ tag });
+    return wines;
+  }
 }
 
 export { mainWineService };

@@ -50,8 +50,8 @@ class Wine {
   }
   // tags array로 검색
   static async findByTags({ tags }) {
-    const tagsjs = JSON.parse(tags)
-    console.log(tagsjs)
+    const tagsjs = JSON.parse(tags);
+    console.log(tagsjs);
     result = [];
     for (let i = 0; i < tagsjs.length; i++) {
       const tag = tagsjs[0][i];
@@ -74,10 +74,12 @@ class Wine {
 
     return result;
   }
-  
-  static async findByTag({ tags }) { 
-    const tag = tags[0]
-    console.log(tag)
+
+  static async findByTagString({ tag }) {
+    const wines = await WineModel.find({
+      keyword: { $elemMatch: { $regex: tag } },
+    }).limit(2);
+    return wines;
   }
 }
 
