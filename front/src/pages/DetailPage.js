@@ -18,7 +18,7 @@ export default function DetailPage() {
       <Header />
       <div style={{ display: "flex" }}>
         <div>
-          <img src={data?.result?.[0]["image"]} />
+          <img src={data?.result?.[0]["image"]} alt="mainImage" />
           <h1>{data?.result?.[0]["title"]}</h1>
         </div>
         <div>
@@ -35,6 +35,7 @@ export default function DetailPage() {
           <img
             src={data?.similar?.[0]}
             style={{ width: "200px", height: "300px" }}
+            alt="similar1"
           />
           <p>{data?.result?.[0]["similar1"]}</p>
         </div>
@@ -42,6 +43,7 @@ export default function DetailPage() {
           <img
             src={data?.similar?.[1]}
             style={{ width: "200px", height: "300px" }}
+            alt="similar2"
           />
           <p>{data?.result?.[0]["similar2"]}</p>
         </div>
@@ -49,6 +51,7 @@ export default function DetailPage() {
           <img
             src={data?.similar?.[2]}
             style={{ width: "200px", height: "300px" }}
+            alt="similar3"
           />
           <p>{data?.result?.[0]["similar3"]}</p>
         </div>
