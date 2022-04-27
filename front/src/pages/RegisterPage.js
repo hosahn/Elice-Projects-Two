@@ -118,6 +118,9 @@ export default function RegisterPage() {
           label="pw"
           type="password"
           onChange={e => handleValueChange("password", e.target.value)}
+          helperText={
+            user.password.length >= 4 ? "" : "4글자 이상으로 설정해주세요."
+          }
         ></TextField>
         <br />
         <TextField
