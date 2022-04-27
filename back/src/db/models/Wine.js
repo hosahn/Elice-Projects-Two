@@ -8,12 +8,13 @@ class Wine {
   }
 
   static async findByCountry({ countryName }) {
-    const result = await WineModel.find({ country: countryName });
+    console.log(countryName);
+    const result = await WineModel.findOne({ country: countryName });
     return result;
   }
 
   static async findByIndex({ index }) {
-    const result = await WineModel.find({ index: index });
+    const result = await WineModel.find({ index });
     return result;
   }
 }

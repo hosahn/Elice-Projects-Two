@@ -4,7 +4,7 @@ const { Schema, model } = pkg;
 const WineSchema = new Schema(
   {
     index: {
-      type: String,
+      type: Number,
       required: true,
     },
     country: {
@@ -63,5 +63,5 @@ const WineSchema = new Schema(
 
   { collection: "wine" },
 );
-const WineModel = model("Wine", WineSchema);
+const WineModel = model("wine", WineSchema);
 export { WineModel };

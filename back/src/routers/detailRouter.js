@@ -8,11 +8,15 @@ detailRouter.get(
   async (req, res, next) => {
     try {
       const index = req.params.index;
-      if (!index || index > "17010") {
-        throw new Error("유효하지 않은 요청입니다.");
-      }
       const result = await detailService.findByIndex({ index });
-      res.send(result);
+      const similarWine = [
+        result[0]["similar1"],
+        result[0]["similar2"],
+        result[0]["similar3"],
+      ];
+      const similarUrl = await detailService.findSimilarUrl({ similarWine });
+      const finalResult = { result: result, similar: similarUrl };
+      res.send(finalResult);
     } catch (e) {
       console.log(e);
       next();

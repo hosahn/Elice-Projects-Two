@@ -9,7 +9,8 @@ class worldService {
       return null; // null값 return
     }
     return result;
-  } //나라에 맞는 와인을 찾아준다.
+  } //나라에 맞는 와인을 찾아준다
+
   static async findByCountryDescription({ countryName }) {
     const result = await Country.findByCountryName({ countryName });
     return result;
