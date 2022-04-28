@@ -15,7 +15,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 
 export default function MainPage() {
-  const [priceValue, setPriceValue] = useState([20, 60]);
+  const [priceValue, setPriceValue] = useState([80000, 150000]);
   const [pointsValue, setPointsValue] = useState([80, 100]);
 
   const handleChange = (e, newValue) => {
@@ -102,6 +102,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
               <FormControlLabel control={<Checkbox />} label="for Meal" />
             </Tooltip>
           </Grid>
+
           <Grid item xs="6">
             <Box
               component="div"
@@ -110,12 +111,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
             >
               <FormLabel sx={{ mr: 2 }}>Price</FormLabel>
               <Slider
+                min={3000}
+                max={500000}
+                step={1000}
                 name="price"
                 value={priceValue}
                 onChange={handleChange}
                 valueLabelDisplay="auto"
-                sx={{ width: 300 }}
+                sx={{ width: 300, marginRight: 2 }}
               />
+              {priceValue[0]}원 ~ {priceValue[1]===500000?"500000+":priceValue[1]}원
             </Box>
             <Box
               component="div"
@@ -128,8 +133,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
                 value={pointsValue}
                 onChange={handleChange}
                 valueLabelDisplay="auto"
-                sx={{ width: 300 }}
+                sx={{ width: 300, marginRight: 2}}
               />
+              {pointsValue[0]} ~ {pointsValue[1]} 점
             </Box>
           </Grid>
         </Grid>
