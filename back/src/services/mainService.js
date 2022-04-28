@@ -50,6 +50,42 @@ class mainWineService {
     const wines = await Wine.findByPoints({ minPoints, maxPoints });
     return wines;
   }
+
+  static async findByTags({ tags }) {
+    const wines = await Wine.findByTags({ tags });
+    return wines;
+  }
+
+  static async findByTagString({ tag }) {
+    const wines = await Wine.findByTagString({ tag });
+    return wines;
+  }
+
+  static async findByPriceandPoints({
+    minPrice,
+    maxPrice,
+    minPoints,
+    maxPoints,
+  }) {
+    const wines = await Wine.findByPriceandPoints({
+      minPrice,
+      maxPrice,
+      minPoints,
+      maxPoints,
+    });
+    return wines;
+  }
+
+  static async findByAll({ tags, minPrice, maxPrice, minPoints, maxPoints }) {
+    const wines = await Wine.findByAll({
+      tags,
+      minPrice,
+      maxPrice,
+      minPoints,
+      maxPoints,
+    });
+    return wines;
+  }
 }
 
 export { mainWineService };
