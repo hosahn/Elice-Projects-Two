@@ -13,27 +13,12 @@ class Wine {
   static async getSixofRandWines() {
     const wines = await WineModel.aggregate([{ $sample: { size: 6 } }]);
     return wines;
-    // const winesFixed = {
-    //   title: wines[0]["title"],
-
-    // }
-    // return winesFixed
   }
 
-  static async findWines({ tags, minPrice, maxPrice, minPoints, maxPoints }) {
-    // 1 or 2 or 3   x = math.randint(1,3) tmpTag =  array[x]; Wine.find({description : tmpTag})
-  }
+  //static async findWines({ tags, minPrice, maxPrice, minPoints, maxPoints }) {
+  // 1 or 2 or 3   x = math.randint(1,3) tmpTag =  array[x]; Wine.find({description : tmpTag})
+  //}
 
-  //static async findWines({ tags, minPrice, maxPrice, minPoints, maxPoints }) {}
-
-  // static async findByTags({ tags }) {
-  //   for (tag in tags) {
-  //     const result = await WineModel.find({
-  //       description: { $regex: tag, $options: "i" },
-  //     });
-  //   }
-  //   return WineModel.find;
-  // }
 
   // * codes for query test
   // price로 검색
@@ -95,6 +80,21 @@ class Wine {
     const wines = await WineModel.find({
       keyword: { $elemMatch: { $regex: tag } },
     }).limit(2);
+    return wines;
+  }
+
+  static async findByPriceandPoints({
+    minPrice,
+    maxPrice,
+    minPoints,
+    maxPoints,
+  }) {
+    const wines = await WineModel.aggregate()
+      .match({
+        price: { $gte: minPrice, $lte: maxPrice },
+        points: { $gte: minPoints, $lte: maxPoints },
+      })
+      .sample(3);
     return wines;
   }
 }
