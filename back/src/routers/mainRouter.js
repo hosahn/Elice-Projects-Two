@@ -106,6 +106,26 @@ mainRouter.get("/main/priceAndPoints", async function (req, res) {
   } catch (e) {
     res.status(404).send(e);
   }
-});
+})
 
+mainRouter.get("/main/all", async function (req, res) {
+  try{
+    const tags = req.body.tags;
+    const minPrice = req.body.minPrice;
+    const maxPrice = req.body.maxPrice;
+    const minPoints = req.body.minPoints;
+    const maxPoints = req.body.maxPoints;
+    const wines = await mainWineService.findByAll({
+      tags,
+      minPrice,
+      maxPrice,
+      minPoints,
+      maxPoints,
+    });
+    res.status(200).json(wines);
+  }catch (e) {
+    res.status(404).send(e);
+
+  }
+})
 export { mainRouter };
