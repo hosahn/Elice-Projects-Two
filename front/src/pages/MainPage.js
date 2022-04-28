@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 import { styled, alpha } from '@mui/material/styles';
 import Header from "../components/Header";
-import { borderRight } from "@mui/system";
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 
