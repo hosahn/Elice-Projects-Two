@@ -36,25 +36,24 @@ class Wine {
   // * codes for query test
   // price로 검색
   static async findByPrice({ minPrice, maxPrice }) {
-    const wines = await WineModel.find({
-      price: { $gte: minPrice, $lte: maxPrice },
-    }).limit(3);
+    const wines = await WineModel.aggregate()
+      .match({ price: { $gte: minPrice, $lte: maxPrice } })
+      .sample(3);
     return wines;
   }
   // points로 검색
   static async findByPoints({ minPoints, maxPoints }) {
-    const wines = await WineModel.find({
-      points: { $gte: minPoints, $lte: maxPoints },
-    }).limit(3);
+    const wines = await WineModel.aggregate()
+      .match({ points: { $gte: minPoints, $lte: maxPoints } })
+      .sample(3);
     return wines;
   }
   // tags array로 검색
   static async findByTags({ tags }) {
-    const tagsjs = JSON.parse(tags);
-    console.log(tagsjs);
+    // {tags:  ['oak', 'berries']} , keyword: ['oak', 'smoky', ..]
     result = [];
-    for (let i = 0; i < tagsjs.length; i++) {
-      const tag = tagsjs[0][i];
+    for (let i = 0; i < tags.length; i++) {
+      const tag = tags[i];
       const wine = await WineModel.find({
         keyword: { $regex: tag },
       }).limit(1);
