@@ -1,4 +1,5 @@
-import { Schema, model } from "mongoose";
+import pkg from "mongoose";
+const { Schema, model } = pkg;
 
 const UserSchema = new Schema(
   {
@@ -18,21 +19,18 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
-    description: {
+    tier: {
       type: String,
       required: false,
-      default: "설명이 아직 없습니다. 추가해 주세요.",
-    },
-    admin: {
-      type: Boolean,
-      default : false,
+      default: "일반 회원",
     },
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 const UserModel = model("User", UserSchema);
-
 export { UserModel };
+
+//UserModel (DB연결완료)

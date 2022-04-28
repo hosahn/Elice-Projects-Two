@@ -1,4 +1,7 @@
 import mongoose from "mongoose";
+import { User } from "./models/User.js";
+import { Wine } from "./models/Wine.js";
+import { Country } from "./models/Country.js";
 import dotenv from "dotenv";
 dotenv.config();
 console.log(process.env.MONGODB_URL);
@@ -15,3 +18,5 @@ db.on("connected", () =>
 db.on("error", error =>
   console.error("MongoDB 연결에 실패하였습니다...\n" + DB_URL + "\n" + error),
 );
+
+export { User, Wine, Country };
