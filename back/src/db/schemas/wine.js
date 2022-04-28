@@ -68,7 +68,8 @@ const WineSchema = new Schema(
       required: true,
     },
   },
+
   { collection: "wine" },
 );
-const WineModel = model("Wine", WineSchema);
+const WineModel = model("wine", WineSchema);
 export { WineModel };

@@ -18,6 +18,10 @@ class User {
     const users = await UserModel.find({});
     return users;
   }
+  static async findByTier({ tierName }) {
+    const users = await UserModel.find({ tier: tierName });
+    return users;
+  }
   static async update({ user_id, fieldToUpdate, newValue }) {
     const filter = { id: user_id };
     const update = { [fieldToUpdate]: newValue };

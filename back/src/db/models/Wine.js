@@ -6,6 +6,7 @@ class Wine {
     const wines = await WineModel.find({});
     return wines;
   }
+  // 수상 내역을 새로 생성합니다.
 
   // 데이터 6개를 랜덤하게 받아오기
   static async getSixofRandWines() {
@@ -41,6 +42,16 @@ class Wine {
       points: { $gte: minPoints, $lte: maxPoints },
     }).limit(3);
     return wines;
+  }
+  static async findByCountry({ countryName }) {
+    console.log(countryName);
+    const result = await WineModel.findOne({ country: countryName });
+    return result;
+  }
+
+  static async findByIndex({ index }) {
+    const result = await WineModel.find({ index });
+    return result;
   }
 }
 
