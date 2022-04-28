@@ -1,5 +1,7 @@
 import { WineModel } from "../schemas/wine.js";
 
+// TODO .exec() 하면 promise로 만들어줌
+
 class Wine {
   // 모든 데이터를 불러오기
   static async findAll() {
@@ -50,27 +52,42 @@ class Wine {
   }
   // tags array로 검색
   static async findByTags({ tags }) {
-    // {tags:  ['oak', 'berries']} , keyword: ['oak', 'smoky', ..]
-    result = [];
-    for (let i = 0; i < tags.length; i++) {
+    let result = [];
+    for (let i in tags) {
       const tag = tags[i];
-      const wine = await WineModel.find({
-        keyword: { $regex: tag },
-      }).limit(1);
-      result.push(wine);
-      // * result 내 중복값 방지하기 위한 코드
-      // for (let s = 0; s < wines.length; s++) {
-      //   const wine = wines[s]["title"];
-      //   if (!result.includes(wine)) {
-      //     result.push(wine);
-      //   }
+      const wines = await WineModel.find({
+        keyword: { $elemMatch: { $regex: tag } },
+      }).limit(6);
+      for (let w in wines) {
+        let wine = wines[w];
+        result.push(wine);
+        // 중복값 처리 (1)-> 안됨 ㅠㅠ
+        // if (!result.includes(wine)) {
+        // result.push(wine);
+        // }
+      }
     }
-    // * for in 을 사용하려던 시도
-    // for (let tag in tags) {
-    //   const wine = await WineModel.find({ keyword: { $regex: tag } }).limit(1);
-    //   result.push(wine);
-    // }
+    // 중복값 처리 (2) -> 안됨..
+    const resultSet = new Set(result);
+    const resultArray = Array.from(resultSet);
+    return resultArray;
+    // return result;  <- 중복값 처리를 (1)로 할 때의 return 값
+  }
 
+  static async findByTagsandReturnTitle({ tags }) {
+    let result = [];
+    for (let i in tags) {
+      const tag = tags[i];
+      const wines = await WineModel.find({
+        keyword: { $elemMatch: { $regex: tag } },
+      }).limit(6);
+      for (let w in wines) {
+        const winesFixed = {
+          title: wines[w].title,
+        };
+        result.push(winesFixed);
+      }
+    }
     return result;
   }
 
