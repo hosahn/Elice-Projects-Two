@@ -44,7 +44,7 @@ function App() {
           <Routes>
             <Route path="/" exact element={<IndexPage />} />
             <Route path="/main" exact element={<MainPage />} />
-            <Route path="/detail:index" exact element={<DetailPage />} />
+            <Route path="/detail/:index" exact element={<DetailPage />} />
             <Route path="/world_map" exact element={<WorldMapPage />} />
             <Route path="/about" exact element={<AboutPage />} />
             <Route path="/user/login" exact element={<LoginPage />} />
