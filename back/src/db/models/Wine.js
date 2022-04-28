@@ -5,15 +5,9 @@ class Wine {
     return WineModel.find({ title: wineName });
   }
 
-  static async findByCountry({ countryName }) {
-    console.log(countryName);
-    const result = await WineModel.findOne({ country: countryName });
-    return result;
-  }
-
-  static async findByIndex({ index }) {
-    const result = await WineModel.find({ index });
-    return result;
+  static async findAll() {
+    const wines = await WineModel.find({});
+    return wines;
   }
 
   // * 데이터 6개를 랜덤하게 받아오기
@@ -98,6 +92,18 @@ class Wine {
     }
     return result;
   }
+
+  static async findByCountry({ countryName }) {
+    console.log(countryName);
+    const result = await WineModel.findOne({ country: countryName });
+    return result;
+  }
+
+  static async findByIndex({ index }) {
+    const result = await WineModel.find({ index });
+    return result;
+  }
 }
+
 
 export { Wine };

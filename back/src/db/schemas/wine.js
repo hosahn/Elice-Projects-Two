@@ -27,8 +27,20 @@ const WineSchema = new Schema(
       type: Number,
       required: true,
     },
+    province: {
+      type: String,
+      required: true,
+    },
     variety: {
       type: String,
+      required: true,
+    },
+    winery: {
+      type: String,
+      required: true,
+    },
+    keyword: {
+      type: Array,
       required: true,
     },
     image: {
@@ -52,10 +64,6 @@ const WineSchema = new Schema(
       required: true,
     },
     similar3: {
-      type: String,
-      required: true,
-    },
-    keyword: {
       type: String,
       required: true,
     },
