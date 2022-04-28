@@ -101,6 +101,11 @@ class Wine {
     const result = await WineModel.find({ index });
     return result;
   }
+
+  static async FindByWineName({ wineName }) {
+    const result = await WineModel.find({ title: wineName });
+    return result;
+  }
 }
 
 export { Wine };
