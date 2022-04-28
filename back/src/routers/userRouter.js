@@ -4,14 +4,6 @@ import { errorMiddleware } from "../middlewares/errorMiddleware.js";
 import { userAuthService } from "../services/userService.js";
 
 const userRouter = Router();
-<<<<<<< HEAD
-
-userRouter.post("/user/register", async function (req, res, next) {
-  console.log(req.body.name);
-  try {
-    if (is.emptyObject(req.body)) {
-      throw new Error("body 제대로 안 넘어왔습니다.");
-=======
 userRouter.post(
   "/user/register",
   async function (req, res, next) {
@@ -40,7 +32,6 @@ userRouter.post(
       res.status(201).json(newUser);
     } catch (error) {
       next(error);
->>>>>>> dev
     }
   },
   errorMiddleware,

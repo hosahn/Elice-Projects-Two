@@ -1,48 +1,96 @@
 import { WineModel } from "../schemas/wine.js";
 
 class Wine {
-  // 모든 데이터를 불러오기
+  // 수상 내역을 새로 생성합니다.
+
   static async findAll() {
     const wines = await WineModel.find({});
     return wines;
   }
-  // 수상 내역을 새로 생성합니다.
 
-  // 데이터 6개를 랜덤하게 받아오기
+  // * 데이터 6개를 랜덤하게 받아오기
   static async getSixofRandWines() {
     const wines = await WineModel.aggregate([{ $sample: { size: 6 } }]);
     return wines;
   }
 
-  static async findWines({ tags, minPrice, maxPrice, minPoints, maxPoints }) {
-    // 1 or 2 or 3   x = math.randint(1,3) tmpTag =  array[x]; Wine.find({description : tmpTag})
+  // *** codes for query test
+  // * tags array로 검색
+  static async findByTags({ tags }) {
+    let result = [];
+    for (let i in tags) {
+      const tag = tags[i];
+      const wines = await WineModel.find({
+        keyword: { $elemMatch: { $regex: tag } },
+      }).limit(6);
+      for (let w in wines) {
+        let wine = wines[w];
+        result.push(wine);
+        // 중복값 처리 (1)-> 안됨 ㅠㅠ
+        // if (!result.includes(wine)) {
+        // result.push(wine);
+        // }
+      }
+    }
+    // 중복값 처리 (2) -> 안됨..
+    const resultSet = new Set(result);
+    const resultArray = Array.from(resultSet);
+    return resultArray;
+    // return result;  <- 중복값 처리를 (1)로 할 때의 return 값
   }
 
-  //static async findWines({ tags, minPrice, maxPrice, minPoints, maxPoints }) {}
+  // * 원하는 필드만 리턴하기
+  static async findByTagsandReturnTitle({ tags }) {
+    let result = [];
+    for (let i in tags) {
+      const tag = tags[i];
+      const wines = await WineModel.find({
+        keyword: { $elemMatch: { $regex: tag } },
+      }).limit(6);
+      for (let w in wines) {
+        const winesFixed = {
+          title: wines[w].title,
+        };
+        result.push(winesFixed);
+      }
+    }
+    return result;
+  }
 
-  // static async findByTags({ tags }) {
-  //   for (tag in tags) {
-  //     const result = await WineModel.find({
-  //       description: { $regex: tag, $options: "i" },
-  //     });
-  //   }
-  //   return WineModel.find;
-  // }
-
-  // price로 검색
-  static async findByPrice({ minPrice, maxPrice }) {
-    const wines = await WineModel.find({
-      price: { $gte: minPrice, $lte: maxPrice },
-    }).limit(3);
+  // * price와 points "AND"로 검색
+  static async findByPriceandPoints({
+    minPrice,
+    maxPrice,
+    minPoints,
+    maxPoints,
+  }) {
+    const wines = await WineModel.aggregate()
+      .match({
+        price: { $gte: minPrice, $lte: maxPrice },
+        points: { $gte: minPoints, $lte: maxPoints },
+      })
+      .sample(3);
     return wines;
   }
-  // points로 검색
-  static async findByPoints({ minPoints, maxPoints }) {
-    const wines = await WineModel.find({
-      points: { $gte: minPoints, $lte: maxPoints },
-    }).limit(3);
-    return wines;
+
+  //* all
+  static async findByAll({ tags, minPrice, maxPrice, minPoints, maxPoints }) {
+    let result = [];
+    for (let i in tags) {
+      const tag = tags[i];
+      const wines = await WineModel.aggregate().match({
+        price: { $gte: minPrice, $lte: maxPrice },
+        points: { $gte: minPoints, $lte: maxPoints },
+        keyword: { $elemMatch: { $regex: tag } },
+      });
+      for (let w in wines) {
+        const wine = wines[w];
+        result.push(wine);
+      }
+    }
+    return result;
   }
+
   static async findByCountry({ countryName }) {
     console.log(countryName);
     const result = await WineModel.findOne({ country: countryName });

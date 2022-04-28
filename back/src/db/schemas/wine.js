@@ -4,7 +4,7 @@ const { Schema, model } = pkg;
 const WineSchema = new Schema(
   {
     index: {
-      type: String,
+      type: Number,
       required: true,
     },
     country: {
