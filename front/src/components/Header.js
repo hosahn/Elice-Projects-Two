@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
-import logo from "../logo.svg";
 
 export default function Header() {
   const [value, setValue] = useState("");
@@ -14,35 +13,28 @@ export default function Header() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar>
-          <a href="/">
-            <img
-              src={logo}
-              alt="logo"
-              style={{ width: "50px", height: "50px" }}
-            />
-          </a>
+        <Toolbar style={{backgroundColor: "#CA2C57"}}>
+            <a href="/main">
+              <img
+                src={process.env.PUBLIC_URL + "/logo512.png"}
+                alt="logo"
+                style={{ width: "100%", height: "75px"}}
+              />
+            </a>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Hello
+            Main
           </Typography>
 
-          <Button variant="text" color="primary" onClick={handleClick}>
-            <Link
-              to="/main"
-              style={{ textDecoration: "none", color: "#FFFFFF" }}
-            >
-              HOME
-            </Link>
-          </Button>
-          <Button variant="text" color="primary" onClick={handleClick}>
+
+          <Button variant="text" color="primary" onClick={handleClick} xs="1">
             <Link
               to="/world_map"
               style={{ textDecoration: "none", color: "#FFFFFF" }}
             >
-              World Map
+              Wine Map
             </Link>
           </Button>
-          <Button variant="text" color="primary" onClick={handleClick}>
+          <Button variant="text" color="primary" onClick={handleClick} xs="1">
             <Link
               to="/about"
               style={{ textDecoration: "none", color: "#FFFFFF" }}
@@ -50,7 +42,7 @@ export default function Header() {
               About Us
             </Link>
           </Button>
-          <Button variant="text" color="primary" onClick={handleClick}>
+          <Button variant="text" color="primary" onClick={handleClick} xs="1">
             <Link
               to="/user/login"
               style={{ textDecoration: "none", color: "#FFFFFF" }}
