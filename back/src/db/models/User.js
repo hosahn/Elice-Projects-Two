@@ -34,6 +34,28 @@ class User {
     );
     return updatedUser;
   }
+
+  static async likedWine({ user_id, wine }) {
+    const filter = { id: user_id };
+    const update = { $addToSet: { liked: [{ mid: wine }] } };
+    const option = { returnOriginal: false };
+    const updatedUser = await UserModel.findOneAndUpdate(
+      filter,
+      update,
+      option,
+    );
+  }
+
+  static async disLikedWine({ user_id, wine }) {
+    const filter = { id: user_id };
+    const update = { $pull: { liked: wine } };
+    const option = { returnOriginal: false };
+    const updatedUser = await UserModel.findOneAndUpdate(
+      filter,
+      update,
+      option,
+    );
+  }
 }
 export { User };
 

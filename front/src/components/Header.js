@@ -1,83 +1,52 @@
 import React from "react";
-import { useState, useContext } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
 
-import { UserStateContext, DispatchContext } from "../App";
-import logo from "../logo.svg";
-
 export default function Header() {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const userState = useContext(UserStateContext);
-  const dispatch = useContext(DispatchContext);
+  const [value, setValue] = useState("");
 
-  const headerText = {
-    "/": "WELCOME",
-    "/main": "MAIN",
-    "/world_map": "WORLD MAP",
-    "/about": "ABOUT US",
-    "/user/login": "LOGIN",
-  };
-
-  const isLogin = !!userState.user;
-
-  const logout = () => {
-    sessionStorage.removeItem("userToken");
-    dispatch({ type: "LOGOUT" });
-    navigate("/");
+  const handleClick = e => {
+    setValue(e.target.innerText);
   };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar>
-          <a href="/">
+        <Toolbar style={{ backgroundColor: "#CA2C57" }}>
+          <a href="/main">
             <img
-              src={logo}
+              src={process.env.PUBLIC_URL + "/logo512.png"}
               alt="logo"
-              style={{ width: "50px", height: "50px" }}
+              style={{ width: "100%", height: "75px" }}
             />
           </a>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            {headerText[location.pathname]}
-          </Typography>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} />
 
-          <Button
-            variant="text"
-            color="inherit"
-            onClick={() => navigate("/main")}
-          >
-            HOME
-          </Button>
-          <Button
-            variant="text"
-            color="inherit"
-            onClick={() => navigate("/world_map")}
-          >
-            World Map
-          </Button>
-          <Button
-            variant="text"
-            color="inherit"
-            onClick={() => navigate("/about")}
-          >
-            About us
-          </Button>
-          {!isLogin && (
-            <Button
-              variant="text"
-              color="inherit"
-              onClick={() => navigate("/user/login")}
+          <Button variant="text" color="primary" onClick={handleClick} xs="1">
+            <Link
+              to="/world_map"
+              style={{ textDecoration: "none", color: "#FFFFFF" }}
             >
-              Login
-            </Button>
-          )}
-          {isLogin && (
-            <Button variant="text" color="inherit" onClick={logout}>
-              Logout
-            </Button>
-          )}
+              Wine Map
+            </Link>
+          </Button>
+          <Button variant="text" color="primary" onClick={handleClick} xs="1">
+            <Link
+              to="/about"
+              style={{ textDecoration: "none", color: "#FFFFFF" }}
+            >
+              About Us
+            </Link>
+          </Button>
+          <Button variant="text" color="primary" onClick={handleClick} xs="1">
+            <Link
+              to="/user/login"
+              style={{ textDecoration: "none", color: "#FFFFFF" }}
+            >
+              login
+            </Link>
+          </Button>
         </Toolbar>
       </AppBar>
     </Box>

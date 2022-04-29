@@ -24,6 +24,11 @@ const UserSchema = new Schema(
       required: false,
       default: "일반 회원",
     },
+    liked: {
+      type: Array,
+      required: false,
+      default: [],
+    },
   },
   {
     timestamps: true,
