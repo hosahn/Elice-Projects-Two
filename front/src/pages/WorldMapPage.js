@@ -75,6 +75,24 @@ function MapChart() {
     }
   };
 
+  const getCountryGrade = country => {
+    const grade = countryGrades[convertCountryName(country)];
+    switch (grade) {
+      case 1:
+        return "green";
+      case 2:
+        return "yellow";
+      case 3:
+        return "blue";
+      case 4:
+        return "orange";
+      case 5:
+        return "red";
+      default:
+        return "#DDD";
+    }
+  };
+
   return (
     <>
       <Header />
@@ -97,17 +115,22 @@ function MapChart() {
           <ZoomableGroup zoom={2}>
             <Geographies geography={geoUrl}>
               {({ geographies }) =>
-                geographies.map(geo => (
-                  <Geography
-                    key={geo.rsmKey}
-                    geography={geo}
-                    fill="#DDD"
-                    stroke="#FFF"
-                    onClick={() =>
-                      handleClick(geo.properties.NAME, geo.properties.CONTINENT)
-                    }
-                  />
-                ))
+                geographies.map(geo => {
+                  return (
+                    <Geography
+                      key={geo.rsmKey}
+                      geography={geo}
+                      fill={getCountryGrade(geo.properties.NAME)}
+                      stroke="#FFF"
+                      onClick={() =>
+                        handleClick(
+                          geo.properties.NAME,
+                          geo.properties.CONTINENT,
+                        )
+                      }
+                    />
+                  );
+                })
               }
             </Geographies>
           </ZoomableGroup>
