@@ -21,10 +21,7 @@ export default function Header() {
                 style={{ width: "100%", height: "75px"}}
               />
             </a>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Main
-          </Typography>
-
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} />
 
           <Button variant="text" color="primary" onClick={handleClick} xs="1">
             <Link
