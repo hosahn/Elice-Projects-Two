@@ -5,15 +5,22 @@ class Wine {
     return WineModel.find({ title: wineName });
   }
 
-  static async findAll() {
-    const wines = await WineModel.find({});
-    return wines;
-  }
-
-  // * 데이터 6개를 랜덤하게 받아오기
+  // * /main -> 데이터 6개를 랜덤하게 받아오기
   static async getSixofRandWines() {
+    let result = [];
     const wines = await WineModel.aggregate([{ $sample: { size: 6 } }]);
-    return wines;
+    for (let w in wines) {
+      const wine = {
+        index: wines[w].index,
+        title: wines[w].title,
+        price: wines[w].price,
+        points: wines[w].points,
+        image: wines[w].image,
+        keyword: wines[w].keyword,
+      };
+      result.push(wine);
+    }
+    return result;
   }
 
   // *** codes for query test
@@ -104,6 +111,5 @@ class Wine {
     return result;
   }
 }
-
 
 export { Wine };
