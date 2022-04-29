@@ -1,4 +1,5 @@
 import { WineModel } from "../schemas/wine.js";
+import _ from "lodash";
 
 class Wine {
   static FindByWineName({ wineName }) {
@@ -44,32 +45,9 @@ class Wine {
         result.push(wine);
       }
     }
-    return result;
-  }
-
-  // *** codes for query test
-  // * tags array로 검색
-  static async findByTags({ tags }) {
-    let result = [];
-    for (let i in tags) {
-      const tag = tags[i];
-      const wines = await WineModel.find({
-        keyword: { $elemMatch: { $regex: tag } },
-      }).limit(6);
-      for (let w in wines) {
-        let wine = wines[w];
-        result.push(wine);
-        // 중복값 처리 (1)-> 안됨 ㅠㅠ
-        // if (!result.includes(wine)) {
-        // result.push(wine);
-        // }
-      }
-    }
-    // 중복값 처리 (2) -> 안됨..
-    const resultSet = new Set(result);
-    const resultArray = Array.from(resultSet);
-    return resultArray;
-    // return result;  <- 중복값 처리를 (1)로 할 때의 return 값
+    const uniqResult = _.uniqBy(result, "index");
+    // randomly return
+    return uniqResult;
   }
 
   // * tag 없을 때 price와 points "AND"로 검색
@@ -86,6 +64,24 @@ class Wine {
       })
       .sample(6);
     return wines;
+  }
+
+  // *** codes for query test
+  // * tags array로 검색
+  static async findByTags({ tags }) {
+    let result = [];
+    for (let i in tags) {
+      const tag = tags[i];
+      const wines = await WineModel.find({
+        keyword: { $elemMatch: { $regex: tag } },
+      }).limit(6);
+      for (let w in wines) {
+        let wine = wines[w];
+        result.push(wine);
+      }
+    }
+    const uniqResult = _.uniqBy(result, "index");
+    return uniqResult;
   }
 
   static async findByCountry({ countryName }) {
