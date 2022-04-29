@@ -29,7 +29,7 @@ class mainWineService {
     }
 
     // db 함수에 변수 전달
-    const wines = await Wine.findWines({
+    const wines = await Wine.findByAll({
       tags,
       minPrice,
       maxPrice,
@@ -62,16 +62,6 @@ class mainWineService {
     return wines;
   }
 
-  static async findByAll({ tags, minPrice, maxPrice, minPoints, maxPoints }) {
-    const wines = await Wine.findByAll({
-      tags,
-      minPrice,
-      maxPrice,
-      minPoints,
-      maxPoints,
-    });
-    return wines;
-  }
 }
 
 export { mainWineService };

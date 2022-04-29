@@ -19,7 +19,7 @@ mainRouter.get("/main", async function (req, res) {
   }
 });
 
-/* 
+
 // main/search ->  filterd wine 정보 제공
 mainRouter.get("/main/search", async function (req, res) {
   // req.body: title, min/maxPrice, min/maxPoints, tags
@@ -47,7 +47,7 @@ mainRouter.get("/main/search", async function (req, res) {
     res.status(404).send(e);
   }
 });
-*/
+
 // query test를 위한 test pages
 
 mainRouter.get("/main/tags", async function (req, res) {
@@ -78,23 +78,4 @@ mainRouter.get("/main/priceAndPoints", async function (req, res) {
   }
 });
 
-mainRouter.get("/main/search", async function (req, res) {
-  try {
-    const tags = req.body.tags;
-    const minPrice = req.body.minPrice;
-    const maxPrice = req.body.maxPrice;
-    const minPoints = req.body.minPoints;
-    const maxPoints = req.body.maxPoints;
-    const wines = await mainWineService.findByAll({
-      tags,
-      minPrice,
-      maxPrice,
-      minPoints,
-      maxPoints,
-    });
-    res.status(200).json(wines);
-  } catch (e) {
-    res.status(404).send(e);
-  }
-});
 export { mainRouter };
