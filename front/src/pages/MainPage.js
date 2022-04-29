@@ -13,6 +13,7 @@ import { styled, alpha } from '@mui/material/styles';
 import Header from "../components/Header";
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
+import WineCard from "../components/WineCard";
 
 export default function MainPage() {
   const [priceValue, setPriceValue] = useState([80000, 150000]);
@@ -149,6 +150,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
+
+        <WineCard/>
       </Container>
     </>
   );
