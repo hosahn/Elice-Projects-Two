@@ -8,7 +8,9 @@ detailRouter.get(
   async (req, res, next) => {
     try {
       const index = req.params.index;
+      //index로 search
       const result = await detailService.findByIndex({ index });
+      //search한 와인의 similar1 2 3를 가져온다.
       const similarWine = [
         result[0]["similar1"],
         result[0]["similar2"],
@@ -18,7 +20,6 @@ detailRouter.get(
       const finalResult = { result: result, similar: similarUrl };
       res.send(finalResult);
     } catch (e) {
-      console.log(e);
       next();
     }
   },

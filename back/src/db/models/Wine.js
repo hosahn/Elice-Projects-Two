@@ -84,9 +84,11 @@ class Wine {
     return uniqResult;
   }
 
+  // countryName으로 3개의 sample을 찾는다.
   static async findByCountry({ countryName }) {
-    console.log(countryName);
-    const result = await WineModel.findOne({ country: countryName });
+    const result = await WineModel.aggregate([
+      { $match: { country: countryName } },
+    ]).sample(3);
     return result;
   }
 

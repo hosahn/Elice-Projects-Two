@@ -4,6 +4,8 @@ import { errorMiddleware } from "../middlewares/errorMiddleware.js";
 import { userAuthService } from "../services/userService.js";
 
 const userRouter = Router();
+
+//회원가입용 함수
 userRouter.post(
   "/user/register",
   async function (req, res, next) {
@@ -36,6 +38,8 @@ userRouter.post(
   },
   errorMiddleware,
 );
+
+//Login용 함수
 userRouter.post(
   "/user/login",
   async function (req, res, next) {
