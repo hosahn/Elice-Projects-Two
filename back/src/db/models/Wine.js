@@ -46,8 +46,8 @@ class Wine {
       }
     }
     const uniqResult = _.uniqBy(result, "index");
-    // randomly return
-    return uniqResult;
+    const uniqRandResult = _.sampleSize(uniqResult, 6);
+    return uniqRandResult;
   }
 
   // * tag 없을 때 price와 points "AND"로 검색
