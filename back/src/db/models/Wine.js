@@ -1,7 +1,9 @@
 import { WineModel } from "../schemas/wine.js";
 
 class Wine {
-  // 수상 내역을 새로 생성합니다.
+  static FindByWineName({ wineName }) {
+    return WineModel.find({ title: wineName });
+  }
 
   static async findAll() {
     const wines = await WineModel.find({});
@@ -101,11 +103,7 @@ class Wine {
     const result = await WineModel.find({ index });
     return result;
   }
-
-  static async FindByWineName({ wineName }) {
-    const result = await WineModel.find({ title: wineName });
-    return result;
-  }
 }
+
 
 export { Wine };

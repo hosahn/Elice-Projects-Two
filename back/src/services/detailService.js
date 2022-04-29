@@ -15,5 +15,6 @@ class detailService {
     }
     return result;
   }
+  //설명추가
 }
 export { detailService };
