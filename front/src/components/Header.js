@@ -14,14 +14,15 @@ export default function Header() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar style={{ backgroundColor: "#CA2C57" }}>
-          <a href="/main">
-            <img
-              src={process.env.PUBLIC_URL + "/logo512.png"}
-              alt="logo"
-              style={{ width: "100%", height: "75px" }}
-            />
-          </a>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} />
+          <Typography sx={{ flexGrow: 1 }}>
+            <Link to="/main">
+              <img
+                src={process.env.PUBLIC_URL + "/logo512.png"}
+                alt="logo"
+                style={{ height: "75px" }}
+              />
+            </Link>
+          </Typography>
 
           <Button variant="text" color="primary" onClick={handleClick} xs="1">
             <Link

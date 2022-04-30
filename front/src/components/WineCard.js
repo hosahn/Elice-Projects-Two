@@ -1,6 +1,7 @@
 import React from "react"
 import {useState} from "react"
 import {Box, Button, Card, CardActions, CardContent, Grid, Typography} from "@mui/material"
+import axios from "axios"
 
 export default function WineCard(wineInfo){
     wineInfo = {
@@ -11,6 +12,7 @@ export default function WineCard(wineInfo){
         type: "레드와인",
         description: "바닐라와 초콜릿 향을 느낄 수 있고 끝맛에 라즈베리의 향 또한 느껴집니다. 오크, 체리, 블랙프루트의 존재감이 살아있으며 볼드하고 훌륭한 와인입니다"
     }
+    
     const cardContent = (
         <React.Fragment>
           <Grid container>
