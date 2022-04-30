@@ -1,88 +1,40 @@
 import { WineModel } from "../schemas/wine.js";
+import _ from "lodash";
 
 class Wine {
   static FindByWineName({ wineName }) {
     return WineModel.find({ title: wineName });
   }
 
-  static async findAll() {
-    const wines = await WineModel.find({});
-    return wines;
-  }
-
-  // * 데이터 6개를 랜덤하게 받아오기
+  // * /main -> 데이터 6개를 랜덤하게 받아오기
   static async getSixofRandWines() {
     const wines = await WineModel.aggregate([{ $sample: { size: 6 } }]);
-    return wines;
+    return wines.map(({ index, title, price, points, image, keyword }) => {
+      return {
+        index,
+        title,
+        price,
+        points,
+        image,
+        keyword,
+      };
+    });
   }
 
-  // *** codes for query test
-  // * tags array로 검색
-  static async findByTags({ tags }) {
-    let result = [];
-    for (let i in tags) {
-      const tag = tags[i];
-      const wines = await WineModel.find({
-        keyword: { $elemMatch: { $regex: tag } },
-      }).limit(6);
-      for (let w in wines) {
-        let wine = wines[w];
-        result.push(wine);
-        // 중복값 처리 (1)-> 안됨 ㅠㅠ
-        // if (!result.includes(wine)) {
-        // result.push(wine);
-        // }
-      }
-    }
-    // 중복값 처리 (2) -> 안됨..
-    const resultSet = new Set(result);
-    const resultArray = Array.from(resultSet);
-    return resultArray;
-    // return result;  <- 중복값 처리를 (1)로 할 때의 return 값
-  }
-
-  // * 원하는 필드만 리턴하기
-  static async findByTagsandReturnTitle({ tags }) {
-    let result = [];
-    for (let i in tags) {
-      const tag = tags[i];
-      const wines = await WineModel.find({
-        keyword: { $elemMatch: { $regex: tag } },
-      }).limit(6);
-      for (let w in wines) {
-        const winesFixed = {
-          title: wines[w].title,
-        };
-        result.push(winesFixed);
-      }
-    }
-    return result;
-  }
-
-  // * price와 points "AND"로 검색
-  static async findByPriceandPoints({
-    minPrice,
-    maxPrice,
-    minPoints,
-    maxPoints,
+  // * /main/search -> 조건에 따른 데이터 6개 받아오기
+  static async findByAll({
+    tags,
+    priceStart,
+    priceEnd,
+    pointsStart,
+    pointsEnd,
   }) {
-    const wines = await WineModel.aggregate()
-      .match({
-        price: { $gte: minPrice, $lte: maxPrice },
-        points: { $gte: minPoints, $lte: maxPoints },
-      })
-      .sample(3);
-    return wines;
-  }
-
-  //* all
-  static async findByAll({ tags, minPrice, maxPrice, minPoints, maxPoints }) {
     let result = [];
     for (let i in tags) {
       const tag = tags[i];
       const wines = await WineModel.aggregate().match({
-        price: { $gte: minPrice, $lte: maxPrice },
-        points: { $gte: minPoints, $lte: maxPoints },
+        price: { $gte: priceStart, $lte: priceEnd },
+        points: { $gte: pointsStart, $lte: pointsEnd },
         keyword: { $elemMatch: { $regex: tag } },
       });
       for (let w in wines) {
@@ -90,12 +42,32 @@ class Wine {
         result.push(wine);
       }
     }
-    return result;
+    const uniqResult = _.uniqBy(result, "index");
+    const uniqRandResult = _.sampleSize(uniqResult, 6);
+    return uniqRandResult;
   }
 
+  // * tag 없을 때 price와 points "AND"로 검색
+  static async findByPriceandPoints({
+    priceStart,
+    priceEnd,
+    pointsStart,
+    pointsEnd,
+  }) {
+    const wines = await WineModel.aggregate()
+      .match({
+        price: { $gte: priceStart, $lte: priceEnd },
+        points: { $gte: pointsStart, $lte: pointsEnd },
+      })
+      .sample(6);
+    return wines;
+  }
+
+  // countryName으로 3개의 sample을 찾는다.
   static async findByCountry({ countryName }) {
-    console.log(countryName);
-    const result = await WineModel.findOne({ country: countryName });
+    const result = await WineModel.aggregate([
+      { $match: { country: countryName } },
+    ]).sample(3);
     return result;
   }
 
@@ -104,6 +76,5 @@ class Wine {
     return result;
   }
 }
-
 
 export { Wine };

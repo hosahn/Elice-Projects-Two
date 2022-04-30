@@ -58,5 +58,4 @@ class User {
   }
 }
 export { User };
-
 //로그인에 사용하는 User 클래스
