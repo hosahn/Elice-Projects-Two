@@ -1,11 +1,10 @@
 import React from "react"
-import {useState} from "react"
-import {Box, Button, Card, CardActions, CardContent, Grid, Typography} from "@mui/material"
+import {Button, Card, CardActions, CardContent, Grid, Typography} from "@mui/material"
 
 export default function WineCard(wineInfo){
     wineInfo = {
         title : "Wanted Zin (원티드 진)",
-        url : "./testUrl.png",
+        url : "/wanted_zin.png",
         grape : "Zinfandel(진판델)",
         location : "Puglia, Italy",
         type: "레드와인",
@@ -34,7 +33,12 @@ export default function WineCard(wineInfo){
                   </CardActions>
               </Grid>
               <Grid item xs={3}>
-                </Grid>
+                  <img
+                    style={{height: "200px"}}
+                    src={process.env.PUBLIC_URL + wineInfo.url}
+                    alt={wineInfo.title}
+                  />
+              </Grid>
           </Grid>
         </React.Fragment>
       );
