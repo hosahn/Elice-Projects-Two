@@ -15,7 +15,7 @@ mainRouter.get("/main", async function (req, res) {
 
 mainRouter.get("/main/search", async function (req, res) {
   try {
-    // 선택하지 않은 경우 빈문자열로 입력
+    // 선택하지 않은 경우 빈문자열로 입력 : get과 body,,,, 
     const tags = req.body.tags;
     const minPrice = req.body.minPrice;
     const maxPrice = req.body.maxPrice;
