@@ -1,15 +1,13 @@
 {
   "name": "back",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon index.js",
+    "server": "nodemon --exec babel-node --es-module-specifier-resolution=node index.js",
     "db": "nodemon ./src/db/index.js ",
-    "dev": "concurrently \"npm run server\"  \"npm run db\" ",
-    "start" : "nodemon index.js --exec babel-node"
+    "dev": "concurrently \"npm run server\"  \"npm run db\" "
   },
   "author": "",
   "license": "ISC",
@@ -27,11 +25,13 @@
     "express": "^4.17.3",
     "express-session": "^1.17.2",
     "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
     "mongoose": "^6.3.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.15",
     "passport": "^0.5.2",
     "path": "^0.12.7",
     "uuid": "^8.3.2"
-  }
+  },
+  "description": ""
 }

@@ -1,50 +1,99 @@
 import { WineModel } from "../schemas/wine.js";
+import _ from "lodash";
 
 class Wine {
-  // 수상 내역을 새로 생성합니다.
-  static create({ newAward }) {
-    return AwardModel.create(newAward);
-  }
-
   static FindByWineName({ wineName }) {
     return WineModel.find({ title: wineName });
   }
 
-  // 수상 내역의 title을 기준으로 검색
-  static getAwardName({ user_id, title }) {
-    return AwardModel.findOne({ user_id, title });
+  // * /main -> 데이터 6개를 랜덤하게 받아오기
+  static async getSixofRandWines() {
+    let result = [];
+    const wines = await WineModel.aggregate([{ $sample: { size: 6 } }]);
+    for (let w in wines) {
+      const wine = {
+        index: wines[w].index,
+        title: wines[w].title,
+        price: wines[w].price,
+        points: wines[w].points,
+        image: wines[w].image,
+        keyword: wines[w].keyword,
+      };
+      result.push(wine);
+    }
+    return result;
   }
 
-  // 사용자 id로 수상 내역 찾기
-  static findById({ awardId }) {
-    return AwardModel.find({ id: awardId });
+  // * /main/search -> 조건에 따른 데이터 6개 받아오기
+  static async findByAll({
+    tags,
+    priceStart,
+    priceEnd,
+    pointsStart,
+    pointsEnd,
+  }) {
+    let result = [];
+    for (let i in tags) {
+      const tag = tags[i];
+      const wines = await WineModel.aggregate().match({
+        price: { $gte: priceStart, $lte: priceEnd },
+        points: { $gte: pointsStart, $lte: pointsEnd },
+        keyword: { $elemMatch: { $regex: tag } },
+      });
+      for (let w in wines) {
+        const wine = wines[w];
+        result.push(wine);
+      }
+    }
+    const uniqResult = _.uniqBy(result, "index");
+    const uniqRandResult = _.sampleSize(uniqResult, 6);
+    return uniqRandResult;
   }
 
-  // 사용자 id를 사용해서 사용자의 모든 수상 내역을 가져오기
-  static findByUserId({ user_id }) {
-    return AwardModel.find({ user_id });
+  // * tag 없을 때 price와 points "AND"로 검색
+  static async findByPriceandPoints({
+    priceStart,
+    priceEnd,
+    pointsStart,
+    pointsEnd,
+  }) {
+    const wines = await WineModel.aggregate()
+      .match({
+        price: { $gte: priceStart, $lte: priceEnd },
+        points: { $gte: pointsStart, $lte: pointsEnd },
+      })
+      .sample(6);
+    return wines;
   }
 
-  // 수상 내역 수정하기
-  static async update({ id, fieldToUpdate, newValue }) {
-    const filter = { id };
-    const update = { [fieldToUpdate]: newValue };
-    const option = { returnOriginal: false };
-
-    const updateAward = await AwardModel.findOneAndUpdate(
-      filter,
-      update,
-      option,
-    );
-    return updateAward;
+  // *** codes for query test
+  // * tags array로 검색
+  static async findByTags({ tags }) {
+    let result = [];
+    for (let i in tags) {
+      const tag = tags[i];
+      const wines = await WineModel.find({
+        keyword: { $elemMatch: { $regex: tag } },
+      }).limit(6);
+      for (let w in wines) {
+        let wine = wines[w];
+        result.push(wine);
+      }
+    }
+    const uniqResult = _.uniqBy(result, "index");
+    return uniqResult;
   }
 
-  static delete({ id, user_id }) {
-    return AwardModel.deleteOne({ id, user_id });
-  }
-
+  // countryName으로 3개의 sample을 찾는다.
   static async findByCountry({ countryName }) {
-    const result = await WineModel.find({ country: countryName });
+    const result = await WineModel.aggregate([
+      { $match: { country: countryName } },
+    ]).sample(3);
+    return result;
+  }
+
+  static async findByIndex({ index }) {
+    const result = await WineModel.find({ index });
     return result;
   }
 }
