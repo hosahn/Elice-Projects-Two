@@ -1,18 +1,16 @@
 import React from "react"
-import {useState} from "react"
-import {Box, Button, Card, CardActions, CardContent, Grid, Typography} from "@mui/material"
-import axios from "axios"
+import {Button, Card, CardActions, CardContent, Grid, Typography} from "@mui/material"
 
-export default function WineCard(wineInfo){
-    wineInfo = {
-        title : "Wanted Zin (원티드 진)",
-        url : "./testUrl.png",
-        grape : "Zinfandel(진판델)",
-        location : "Puglia, Italy",
-        type: "레드와인",
-        description: "바닐라와 초콜릿 향을 느낄 수 있고 끝맛에 라즈베리의 향 또한 느껴집니다. 오크, 체리, 블랙프루트의 존재감이 살아있으며 볼드하고 훌륭한 와인입니다"
-    }
-    
+export default function WineCard({wineInfo}){
+    // wineInfo = {
+    //     title : "Wanted Zin (원티드 진)",
+    //     url : "/wanted_zin.png",
+    //     grape : "Zinfandel(진판델)",
+    //     location : "Puglia, Italy",
+    //     type: "레드와인",
+    //     description: "바닐라와 초콜릿 향을 느낄 수 있고 끝맛에 라즈베리의 향 또한 느껴집니다. 오크, 체리, 블랙프루트의 존재감이 살아있으며 볼드하고 훌륭한 와인입니다"
+    // }
+
     const cardContent = (
         <React.Fragment>
           <Grid container>
@@ -36,13 +34,18 @@ export default function WineCard(wineInfo){
                   </CardActions>
               </Grid>
               <Grid item xs={3}>
-                </Grid>
+                  <img
+                    style={{height: "200px", transform: "scale(1.2)"}}
+                    src={process.env.PUBLIC_URL + wineInfo.url}
+                    alt={wineInfo.title}
+                  />
+              </Grid>
           </Grid>
         </React.Fragment>
       );
 
     return (
-        <Card>
+        <Card sx={{overflow: "visible"}}>
             {cardContent}
         </Card>
     );

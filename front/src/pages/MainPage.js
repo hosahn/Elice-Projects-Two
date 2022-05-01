@@ -8,6 +8,7 @@ import {
   Grid,
   Slider,
   Tooltip,
+  Input,
 } from "@mui/material";
 import { styled, alpha } from '@mui/material/styles';
 import Header from "../components/Header";
@@ -121,7 +122,21 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
                 valueLabelDisplay="auto"
                 sx={{ width: 300, marginRight: 2 }}
               />
-              {priceValue[0]}원 ~ {priceValue[1]===500000?"500000+":priceValue[1]}원
+              <Input
+                type="text"
+                value={priceValue[0]}
+                onChange={(e)=>{
+                  setPriceValue([Number(e.target.value), priceValue[1]])
+                }}
+              />
+              ~
+              <Input
+                type="text"
+                value={priceValue[1]}
+                onChange={(e)=>{
+                  setPriceValue([priceValue[0], Number(e.target.value)])
+                }}
+              />
             </Box>
             <Box
               component="div"
@@ -151,7 +166,44 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
             />
           </Search>
 
-        <WineCard/>
+        <Grid container xs={12} spacing={1}>
+          <Grid item xs={4}>
+            <WineCard
+              wineInfo={{
+                title : "Wanted Zin (원티드 진)",
+                url : "/wanted_zin.png",
+                grape : "Zinfandel(진판델)",
+                location : "Puglia, Italy",
+                type: "레드와인",
+                description: "바닐라와 초콜릿 향을 느낄 수 있고 끝맛에 라즈베리의 향 또한 느껴집니다. 오크, 체리, 블랙프루트의 존재감이 살아있으며 볼드하고 훌륭한 와인입니다"
+              }}
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <WineCard
+              wineInfo={{
+                title : "Wanted Zin (원티드 진)",
+                url : "/wanted_zin.png",
+                grape : "Zinfandel(진판델)",
+                location : "Puglia, Italy",
+                type: "레드와인",
+                description: "바닐라와 초콜릿 향을 느낄 수 있고 끝맛에 라즈베리의 향 또한 느껴집니다. 오크, 체리, 블랙프루트의 존재감이 살아있으며 볼드하고 훌륭한 와인입니다"
+              }}
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <WineCard
+              wineInfo={{
+                title : "Wanted Zin (원티드 진)",
+                url : "/wanted_zin.png",
+                grape : "Zinfandel(진판델)",
+                location : "Puglia, Italy",
+                type: "레드와인",
+                description: "바닐라와 초콜릿 향을 느낄 수 있고 끝맛에 라즈베리의 향 또한 느껴집니다. 오크, 체리, 블랙프루트의 존재감이 살아있으며 볼드하고 훌륭한 와인입니다"
+              }}
+            />
+          </Grid>
+        </Grid>
       </Container>
     </>
   );
