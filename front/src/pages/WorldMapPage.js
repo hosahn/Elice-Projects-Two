@@ -1,45 +1,120 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   ComposableMap,
   Geographies,
   Geography,
   ZoomableGroup,
-  Marker,
 } from "react-simple-maps";
+import { Box, Container, Typography, Paper } from "@mui/material";
 
+import * as Api from "../api";
 import Header from "../components/Header";
+import { countryGrades } from "../constants/Country";
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
+const convertCountryName = name => {
+  switch (name) {
+    case "United States of America":
+      return "US";
+    case "United Kingdom":
+      return "England";
+    default:
+      return name;
+  }
+};
+
+const getCountryGrade = country => {
+  const grade = countryGrades[convertCountryName(country)];
+
+  switch (grade) {
+    case 1:
+      return "#FDEEF2";
+    case 2:
+      return "#F8CCD9";
+    case 3:
+      return "#F198B3";
+    case 4:
+      return "#E9658D";
+    case 5:
+      return "#CA2C57";
+    default:
+      return "#DDD";
+  }
+};
+
 function MapChart() {
-  const handleClick = e => {
-    console.log(e.target);
+  const [wine, setWine] = useState({});
+  const [description, setDescription] = useState("");
+  const [isExist, setIsExist] = useState(false);
+
+  const handleClick = async name => {
+    try {
+      const res = await Api.get(`worldMap/${convertCountryName(name)}`);
+
+      setDescription(res.data.description[0].description);
+      setWine(res.data.wine);
+      setIsExist(true);
+    } catch (err) {
+      setIsExist(false);
+    }
   };
 
   return (
     <>
       <Header />
-      <ComposableMap style={{ maxWidth: "1000px" }}>
-        <ZoomableGroup zoom={1}>
-          <Geographies geography={geoUrl}>
-            {({ geographies }) =>
-              geographies.map(geo => (
-                <Geography
-                  key={geo.rsmKey}
-                  geography={geo}
-                  fill="#DDD"
-                  stroke="#FFF"
-                  onClick={handleClick}
-                />
-              ))
-            }
-          </Geographies>
-          <Marker coordinates={[-74.006, 40.7128]}>
-            <circle r={4} fill="#F53" />
-          </Marker>
-        </ZoomableGroup>
-      </ComposableMap>
+      <Container fixed style={{ textAlign: "center" }}>
+        <ComposableMap
+          style={{
+            width: "1000px",
+            height: "400px",
+            margin: "20px 0",
+            border: "1px solid lightgray",
+          }}
+        >
+          <ZoomableGroup zoom={2}>
+            <Geographies geography={geoUrl}>
+              {({ geographies }) =>
+                geographies.map(geo => {
+                  return (
+                    <Geography
+                      key={geo.rsmKey}
+                      geography={geo}
+                      fill={getCountryGrade(geo.properties.NAME)}
+                      stroke="#FFF"
+                      onClick={() =>
+                        handleClick(
+                          geo.properties.NAME,
+                          geo.properties.CONTINENT,
+                        )
+                      }
+                    />
+                  );
+                })
+              }
+            </Geographies>
+          </ZoomableGroup>
+        </ComposableMap>
+
+        {isExist && (
+          <Paper
+            style={{
+              width: "960px",
+              height: "120px",
+              border: "1px solid lightgray",
+              display: "flex",
+              alignItems: "center",
+              padding: "10px 20px",
+              marginLeft: "75px",
+            }}
+          >
+            <Typography variant="subtitle1">{description}</Typography>
+          </Paper>
+        )}
+
+        {/* isExist && 와인 카드 */}
+      </Container>
     </>
   );
 }
