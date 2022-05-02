@@ -26,7 +26,7 @@ const UserSchema = new Schema(
     },
     liked: {
       type: Array,
-      required: false,
+      required: true,
       default: [],
     },
   },

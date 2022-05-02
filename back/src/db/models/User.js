@@ -35,6 +35,11 @@ class User {
     return updatedUser;
   }
 
+  static async getLikedWines({ user }) {
+    const result = await UserModel.find({ email: user });
+    return result[0].liked;
+  }
+
   static async likedWine({ user_id, wine }) {
     const filter = { id: user_id };
     const update = { $addToSet: { liked: [{ mid: wine }] } };

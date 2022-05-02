@@ -5,6 +5,7 @@ import { userRouter } from "./routers/userRouter.js";
 import { worldRouter } from "./routers/worldRouter.js";
 import { mainRouter } from "./routers/mainRouter.js";
 import { detailRouter } from "./routers/detailRouter.js";
+import { myPageRouter } from "./routers/myPageRouter.js";
 const app = express();
 // CORS 에러 방지
 app.use(cors());
@@ -14,6 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(userRouter);
 app.use(worldRouter);
 app.use(mainRouter);
+app.use(myPageRouter);
 app.use(detailRouter);
 app.use("/a", login_required, (req, res) => {
   res.send("a");
