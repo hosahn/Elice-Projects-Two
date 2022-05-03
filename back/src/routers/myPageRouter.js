@@ -3,21 +3,29 @@ import { myPageService } from "../services/myPageService.js";
 import { login_required } from "../middlewares/login_required";
 import { errorMiddleware } from "../middlewares/errorMiddleware.js";
 import { detailService } from "../services/detailService.js";
-import { userAuthService } from "../services/userService";
 
 const myPageRouter = Router();
 
-myPageRouter.get("/myPage/:id", login_required, async (req, res) => {
-  const user_id = req.params.id;
-  const likedWine = await myPageService.getLikedWines({ user_id });
-  const result = [];
-  for (let i = 0; i < likedWine.length; i++) {
-    let index = Number(likedWine[i]);
-    const tmpResult = await detailService.findByIndex({ index });
-    result.push(tmpResult);
-  }
-  res.send(result);
-});
+myPageRouter.get(
+  "/myPage/:id",
+  login_required,
+  async (req, res) => {
+    const user_id = req.params.id;
+    try {
+      const likedWine = await myPageService.getLikedWines({ user_id });
+      const result = [];
+      for (let i = 0; i < likedWine.length; i++) {
+        let index = Number(likedWine[i]);
+        const tmpResult = await detailService.findByIndex({ index });
+        result.push(tmpResult);
+      }
+      res.send(result);
+    } catch (e) {
+      next();
+    }
+  },
+  errorMiddleware,
+);
 
 myPageRouter.put(
   "/myPage/:id/reset",
@@ -40,9 +48,10 @@ myPageRouter.put(
 
       res.status(200).json(updatedUser);
     } catch (error) {
-      next(error);
+      next();
     }
   },
+  errorMiddleware,
 );
 
 export { myPageRouter };

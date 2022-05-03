@@ -27,11 +27,20 @@ detailRouter.get(
   errorMiddleware,
 );
 
-detailRouter.post("/detail/:index", login_required, async (req, res) => {
-  const index = req.params.index;
-  const { user_id, bool } = req.body;
-  const liked = await detailService.clickWine({ index, user_id, bool });
-  res.send(liked);
-});
+detailRouter.post(
+  "/detail/:index",
+  login_required,
+  async (req, res) => {
+    try {
+      const index = req.params.index;
+      const { user_id, bool } = req.body;
+      const liked = await detailService.clickWine({ index, user_id, bool });
+      res.send(liked);
+    } catch (e) {
+      next();
+    }
+  },
+  errorMiddleware,
+);
 
 export { detailRouter };
