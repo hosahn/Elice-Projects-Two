@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../components/Header";
 import { useParams, NavLink } from "react-router-dom";
+import WineCard from "../components/WineCard";
 
 export default function DetailPage() {
   const params = useParams();
