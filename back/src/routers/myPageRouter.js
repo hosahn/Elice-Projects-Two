@@ -7,10 +7,10 @@ import { userAuthService } from "../services/userService";
 
 const myPageRouter = Router();
 
-myPageRouter.get("/myPage/:email", login_required, async (req, res) => {
-  const user = req.params.email;
+myPageRouter.get("/myPage/:id", login_required, async (req, res) => {
+  const user_id = req.params.id;
   console.log(user);
-  const likedWine = await myPageService.getLikedWines({ user });
+  const likedWine = await myPageService.getLikedWines({ user_id });
   const result = [];
   for (let i = 0; i < likedWine.length; i++) {
     let tmp = result[i];

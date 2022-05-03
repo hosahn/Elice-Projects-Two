@@ -35,31 +35,33 @@ class User {
     return updatedUser;
   }
 
-  static async getLikedWines({ user }) {
-    const result = await UserModel.find({ email: user });
+  static async getLikedWines({ user_id }) {
+    const result = await UserModel.find({ id: user_id });
     return result[0].liked;
   }
 
-  static async likedWine({ user_id, wine }) {
+  static async likedWine({ user_id, index }) {
     const filter = { id: user_id };
-    const update = { $addToSet: { liked: [{ mid: wine }] } };
-    const option = { returnOriginal: false };
+    const update = { $addToSet: { liked: index } };
+    const option = { returnOriginal: true };
     const updatedUser = await UserModel.findOneAndUpdate(
       filter,
       update,
       option,
     );
+    return updatedUser;
   }
 
-  static async disLikedWine({ user_id, wine }) {
+  static async disLikedWine({ user_id, index }) {
     const filter = { id: user_id };
-    const update = { $pull: { liked: wine } };
-    const option = { returnOriginal: false };
+    const update = { $pull: { liked: index } };
+    const option = { returnOriginal: true };
     const updatedUser = await UserModel.findOneAndUpdate(
       filter,
       update,
       option,
     );
+    return updatedUser;
   }
 }
 export { User };

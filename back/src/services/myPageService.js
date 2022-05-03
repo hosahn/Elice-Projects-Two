@@ -1,8 +1,8 @@
 import { User } from "../db/index.js";
 
 class myPageService {
-  static async getLikedWines({ user }) {
-    const result = await User.getLikedWines({ user });
+  static async getLikedWines({ user_id }) {
+    const result = await User.getLikedWines({ user_id });
     return result;
   }
   static async setUser({ user_id, toUpdate }) {

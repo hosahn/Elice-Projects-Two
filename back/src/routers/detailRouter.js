@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { detailService } from "../services/detailService.js";
 import { errorMiddleware } from "../middlewares/errorMiddleware.js";
+import { login_required } from "../middlewares/login_required.js";
 const detailRouter = Router();
 
 detailRouter.get(
@@ -25,5 +26,12 @@ detailRouter.get(
   },
   errorMiddleware,
 );
+
+detailRouter.post("/detail/:index", login_required, async (req, res) => {
+  const index = req.params.index;
+  const { user_id, bool } = req.body;
+  const liked = await detailService.clickWine({ index, user_id, bool });
+  res.send(liked);
+});
 
 export { detailRouter };
