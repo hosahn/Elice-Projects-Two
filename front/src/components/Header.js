@@ -1,13 +1,37 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Button,
+  IconButton,
+  Menu,
+  MenuItem,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+
+import { UserStateContext, DispatchContext } from "../App";
 
 export default function Header() {
-  const [value, setValue] = useState("");
+  const userState = useContext(UserStateContext);
+  const dispatch = useContext(DispatchContext);
+  const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleClick = e => {
-    setValue(e.target.innerText);
+  const isLogin = !!userState.user;
+
+  const logout = () => {
+    sessionStorage.removeItem("userToken");
+    dispatch({ type: "LOGOUT" });
+  };
+
+  const handleMenuClick = e => {
+    setAnchorEl(e.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
   };
 
   return (
@@ -24,7 +48,7 @@ export default function Header() {
             </Link>
           </Typography>
 
-          <Button variant="text" color="primary" onClick={handleClick} xs="1">
+          <Button variant="text" color="primary" xs="1">
             <Link
               to="/world_map"
               style={{ textDecoration: "none", color: "#FFFFFF" }}
@@ -32,7 +56,7 @@ export default function Header() {
               Wine Map
             </Link>
           </Button>
-          <Button variant="text" color="primary" onClick={handleClick} xs="1">
+          <Button variant="text" color="primary" xs="1">
             <Link
               to="/about"
               style={{ textDecoration: "none", color: "#FFFFFF" }}
@@ -40,14 +64,51 @@ export default function Header() {
               About Us
             </Link>
           </Button>
-          <Button variant="text" color="primary" onClick={handleClick} xs="1">
-            <Link
-              to="/user/login"
-              style={{ textDecoration: "none", color: "#FFFFFF" }}
-            >
-              login
-            </Link>
-          </Button>
+          {!isLogin && (
+            <Button variant="text" color="primary" xs="1">
+              <Link
+                to="/user/login"
+                style={{ textDecoration: "none", color: "#FFFFFF" }}
+              >
+                login
+              </Link>
+            </Button>
+          )}
+          {isLogin && (
+            <div>
+              <IconButton
+                size="large"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenuClick}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "right",
+                }}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleMenuClose}
+              >
+                <MenuItem style={{ fontSize: "14px" }}>
+                  <Link
+                    to="/my_page"
+                    style={{ textDecoration: "none", color: "#000000" }}
+                  >
+                    My Page
+                  </Link>
+                </MenuItem>
+                <MenuItem style={{ fontSize: "14px" }} onClick={logout}>
+                  Logout
+                </MenuItem>
+              </Menu>
+            </div>
+          )}
         </Toolbar>
       </AppBar>
     </Box>

@@ -9,6 +9,7 @@ import WorldMapPage from "./pages/WorldMapPage";
 import AboutPage from "./pages/AboutPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import MyPage from "./pages/MyPage";
 
 export const UserStateContext = createContext(null);
 export const DispatchContext = createContext(null);
@@ -49,6 +50,7 @@ function App() {
             <Route path="/about" exact element={<AboutPage />} />
             <Route path="/user/login" exact element={<LoginPage />} />
             <Route path="/user/register" exact element={<RegisterPage />} />
+            <Route path="/my_page" exact element={<MyPage />} />
           </Routes>
         </Router>
       </UserStateContext.Provider>
