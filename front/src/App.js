@@ -50,7 +50,7 @@ function App() {
             <Route path="/about" exact element={<AboutPage />} />
             <Route path="/user/login" exact element={<LoginPage />} />
             <Route path="/user/register" exact element={<RegisterPage />} />
-            <Route path="/my_page" exact element={<MyPage />} />
+            <Route path="/myPage" exact element={<MyPage />} />
           </Routes>
         </Router>
       </UserStateContext.Provider>
