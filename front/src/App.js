@@ -2,6 +2,7 @@ import { useEffect, useReducer, createContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { loginReducer } from "./reducer";
+import * as Api from "./api";
 import IndexPage from "./pages/IndexPage";
 import MainPage from "./pages/MainPage";
 import DetailPage from "./pages/DetailPage";
@@ -22,7 +23,8 @@ function App() {
   const fetchCurrentUser = async () => {
     try {
       // 이전에 발급받은 토큰이 있다면, 이를 가지고 유저 정보를 받아옴.
-      const currentUser = await sessionStorage.getItem("userToken");
+      const res = await Api.get("user/current");
+      const currentUser = res.data;
 
       // dispatch 함수를 통해 로그인 성공 상태로 만듦.
       dispatch({
@@ -50,7 +52,7 @@ function App() {
             <Route path="/about" exact element={<AboutPage />} />
             <Route path="/user/login" exact element={<LoginPage />} />
             <Route path="/user/register" exact element={<RegisterPage />} />
-            <Route path="/myPage" exact element={<MyPage />} />
+            <Route path="/my_page" exact element={<MyPage />} />
           </Routes>
         </Router>
       </UserStateContext.Provider>

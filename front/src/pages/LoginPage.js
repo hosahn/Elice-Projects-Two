@@ -40,7 +40,7 @@ export default function LoginPage() {
 
       dispatch({
         type: "LOGIN_SUCCESS",
-        payload: user,
+        payload: data,
       });
 
       navigate("/main");
