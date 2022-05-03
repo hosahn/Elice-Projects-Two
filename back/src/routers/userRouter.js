@@ -46,6 +46,7 @@ userRouter.post(
     try {
       const email = req.body.email;
       const password = req.body.password;
+      console.log(email);
       const user = await userAuthService.getUser({ email, password });
       if (user.errorMessage) {
         throw new Error(user.errorMessage);

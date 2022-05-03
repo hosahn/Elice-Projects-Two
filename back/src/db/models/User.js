@@ -2,7 +2,6 @@ import { UserModel } from "../schemas/user.js";
 
 class User {
   static async create({ newUser }) {
-    console.log(newUser);
     const createdNewUser = await UserModel.create(newUser);
     return createdNewUser;
   }
