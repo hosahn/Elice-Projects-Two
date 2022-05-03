@@ -1,24 +1,36 @@
 # (서비스 명)
 - Drunken Rabbit
-- 최종 서비스의 한 줄 소개를 작성하세요.
+- Drink Easy, Druken Rabbit!
 
 
 ## 프로젝트 구성 안내
 
 * `와인을 잘 모르는 사람들에게 와인 진입 장벽을 낮추는 서비스.
-더불어, 해당 와인 생산지에 있는 미슐랭 레스토랑까지 살펴볼 수 있는 서비스 개발.
-놀러 가고 싶은 지역의 와인과 맛있는 레스토랑을 검색하고 싶다는 요구를 반영.`
-
-* `초기 기획은 언제든 수정될 수 있으니 웹서비스 결과를 내는데 초점을 두시기 바랍니다.`
+더불어, 세계 여러나라의 와인의 특징과 자신이 고른 와인과 비슷한 와인 추천, 특정 와인과 잘 어울리는 안주 고르기 등
+다양한 와인 경험에 관련된 서비스를 제공한다.`
 
 ## 1. 프로젝트 소개
 
-**어떠한 데이터셋와 도구 및 기술을 사용했는지에 대한 설명과 엔드유저에게 보이는 웹서비스에 대한 소개**
+**서비스 내 사용 데이터**
+  - **Wine Reviews** points 데이터, 지역 데이터 등 사용
+  - 11만개 이상 와인 종에 대한 review가 모아져 있는 데이터.
+  - 점수를 기준으로 모수를 줄일 수 있음
+  - [wine reviews](https://www.kaggle.com/datasets/zynicide/wine-reviews)
+**시각화를 통한 문제 제기에 사용할 dataset**
+  - wine 생산국이 너무 많기에 발생하는 선택의 어려움 (와인이 매우 다양함)
+  - [wine recommender](https://www.kaggle.com/code/sudhirnl7/wine-recommender/notebook)
+  - alcohol consumption per capita가 증가함을 보이는 데이터셋
+  - [alcohol consumption per capita](https://www.kaggle.com/datasets/sveneschlbeck/alcohol-consumption-per-capita-year-and-country)
+**그 외 사용한 data**
+  - 웹 크롤링을 통해 만든 wine image url 데이터셋
+  - word2vec을 활용하여 만든 유사 와인 데이터셋
+**기술 스택**
+  - 프론트 : HTML, CSS, JS, React, Chart.js, worldMap.js
+  - 백엔드 : JS, nodejs, MongoDB
+  - 데이터 분석 : python, pandas, selenium, word2vec, numpy, matplotlib 
 
-  - 사용하려는 데이터(제안된 데이터 중 하나 또는 선택한 다른 데이터 세트)를 명시, 이에 대한 설명
-  - 기술 스택 (python, d3, pandas, jupyter, javascript, MySQL 등)
-  - 사용된 라이브러리 (numpy, matplotlib, wordcloud 등)
-  - 웹서비스에 대한 자세한 개요
+**웹서비스 개요**
+  - 
 
 ## 2. 프로젝트 목표
 
