@@ -39,6 +39,28 @@ userRouter.post(
   errorMiddleware,
 );
 
+userRouter.get(
+  "/user/current",
+  login_required,
+  async function (req, res, next) {
+    try {
+      // jwt토큰에서 추출된 사용자 id를 가지고 db에서 사용자 정보를 찾음.
+      const user_id = req.currentUserId;
+      const currentUserInfo = await userAuthService.getUserInfo({
+        user_id,
+      });
+
+      if (currentUserInfo.errorMessage) {
+        throw new Error(currentUserInfo.errorMessage);
+      }
+
+      res.status(200).send(currentUserInfo);
+    } catch (error) {
+      next(error);
+    }
+  },
+);
+
 //Login용 함수
 userRouter.post(
   "/user/login",
