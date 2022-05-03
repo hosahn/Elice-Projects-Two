@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Divider, Grid, List, ListItem, ListItemText } from "@mui/material";
 
+import * as Api from "../api";
 import Header from "../components/Header";
 import { UserStateContext } from "../App";
 
@@ -18,8 +19,12 @@ export default function MyPage() {
   }, [user, navigate]);
 
   useEffect(() => {
+    const getFavoriteWines = async () => {
+      const { data } = await Api.get(`myPage/${user.id}`);
+      console.log(data);
+    };
     if (selectedMenu === "좋아요한 와인") {
-      // 좋아요한 와인 목록 호출
+      getFavoriteWines();
     }
   }, [selectedMenu]);
 
