@@ -34,6 +34,7 @@ detailRouter.post(
     try {
       const index = req.params.index;
       const { user_id, bool } = req.body;
+      console.log(bool);
       const liked = await detailService.clickWine({ index, user_id, bool });
       res.send(liked);
     } catch (e) {

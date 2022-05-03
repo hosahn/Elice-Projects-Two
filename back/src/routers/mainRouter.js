@@ -9,7 +9,7 @@ mainRouter.get(
   async function (req, res) {
     try {
       const randSelected = await mainWineService.getAnyWines();
-      res.status(200).json(randSelected); // json 형태로 제공됩니다.
+      res.send(randSelected); // json 형태로 제공됩니다.
     } catch (e) {
       next();
     }
