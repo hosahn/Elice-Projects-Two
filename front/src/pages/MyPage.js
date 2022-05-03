@@ -1,16 +1,28 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Divider, Grid, List, ListItem, ListItemText } from "@mui/material";
+import {
+  Button,
+  Divider,
+  Grid,
+  Input,
+  List,
+  ListItem,
+  ListItemText,
+  TextField,
+} from "@mui/material";
+import { styled } from "@mui/material/styles";
 
 import * as Api from "../api";
 import Header from "../components/Header";
 import { UserStateContext } from "../App";
+import WineCard from "../components/WineCard";
 
 export default function MyPage() {
   const navigate = useNavigate();
   const { user } = useContext(UserStateContext);
   const [selectedMenu, setSelectedMenu] = useState("회원정보 수정");
   const [favoriteWines, setFavoriteWines] = useState([]);
+  const [newUser, setNewUser] = useState({ name: user?.name, password: "" });
 
   useEffect(() => {
     if (!user) {
@@ -21,12 +33,29 @@ export default function MyPage() {
   useEffect(() => {
     const getFavoriteWines = async () => {
       const { data } = await Api.get(`myPage/${user.id}`);
-      console.log(data);
+      setFavoriteWines(data[0]);
     };
+
+    const updateUserInfo = async () => {
+      const res = await Api.put(`myPage/${user.id}/reset`, newUser);
+      console.log(res);
+    };
+
     if (selectedMenu === "좋아요한 와인") {
       getFavoriteWines();
     }
   }, [selectedMenu]);
+
+  const handleValueChange = (name, value) => {
+    setNewUser(prev => ({ ...prev, [name]: value }));
+    console.log(name, value);
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    // console.log(newUser);
+    // newUser -> name, password 만
+  };
 
   return (
     <>
@@ -35,7 +64,6 @@ export default function MyPage() {
         <Grid item xs={4} display="flex" justifyContent="center">
           <List
             component="nav"
-            aria-label="mailbox folders"
             style={{
               width: "200px",
               border: "1px solid lightgray",
@@ -65,9 +93,37 @@ export default function MyPage() {
 
         <Grid item xs={8} style={{ paddingTop: "40px" }}>
           {selectedMenu === "회원정보 수정" ? (
-            <div>회원정보 수정</div>
+            <form onSubmit={handleSubmit}>
+              <TextField label="email" value={user.email} />
+              <br />
+              <TextField
+                label="name"
+                value={newUser.name}
+                onChange={e => handleValueChange("name", e.currentTarget.value)}
+              />
+              <br />
+              <TextField
+                label="password"
+                value={newUser.password}
+                onChange={e =>
+                  handleValueChange("password", e.currentTarget.value)
+                }
+              />
+              <br />
+              <TextField label="tier" value={user.tier} />
+              <br />
+              <Button variant="contained" type="submit">
+                회원정보 수정
+              </Button>
+            </form>
           ) : (
-            <div>좋아요한 와인</div>
+            <Grid container xs={12} spacing={1}>
+              {favoriteWines?.map((wine, idx) => (
+                <Grid key={`favorite-wine-${idx}`} item xs={6}>
+                  <WineCard wineInfo={wine} />
+                </Grid>
+              ))}
+            </Grid>
           )}
         </Grid>
       </Grid>
