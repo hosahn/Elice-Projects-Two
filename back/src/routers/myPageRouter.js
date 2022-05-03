@@ -9,12 +9,12 @@ const myPageRouter = Router();
 
 myPageRouter.get("/myPage/:id", login_required, async (req, res) => {
   const user_id = req.params.id;
-  console.log(user);
   const likedWine = await myPageService.getLikedWines({ user_id });
   const result = [];
   for (let i = 0; i < likedWine.length; i++) {
-    let tmp = result[i];
-    result.push(detailService.findByIndex({ tmp }));
+    let index = Number(likedWine[i]);
+    const tmpResult = await detailService.findByIndex({ index });
+    result.push(tmpResult);
   }
   res.send(result);
 });
