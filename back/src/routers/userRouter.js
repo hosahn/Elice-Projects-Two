@@ -2,6 +2,7 @@ import is from "@sindresorhus/is";
 import { Router } from "express";
 import { errorMiddleware } from "../middlewares/errorMiddleware.js";
 import { userAuthService } from "../services/userService.js";
+import { login_required } from "../middlewares/login_required.js";
 
 const userRouter = Router();
 
