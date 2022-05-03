@@ -59,8 +59,22 @@ export default function DetailPage() {
 
       <h2>{data?.result?.[0]["title"]}과 잘 어울리는 안주입니다!</h2>
       <div style={{ display: "flex" }}>
-        <p>{data?.result?.[0]["snack1"]}</p>
-        <p>{data?.result?.[0]["snack2"]}</p>
+        <div>
+          <img
+            src="https://cdn.pixabay.com/photo/2016/05/17/09/27/fruit-1397736__480.jpg"
+            alt="snack2"
+            style={{ width: "200px", height: "300px" }}
+          />
+          <p>{data?.result?.[0]["snack1"]}</p>
+        </div>
+        <div>
+          <img
+            src="https://cdn.pixabay.com/photo/2016/05/17/09/27/fruit-1397736__480.jpg"
+            alt="snack2"
+            style={{ width: "200px", height: "300px" }}
+          />
+          <p>{data?.result?.[0]["snack2"]}</p>
+        </div>
       </div>
     </>
   );
