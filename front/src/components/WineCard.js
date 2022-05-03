@@ -18,6 +18,19 @@ export default function WineCard({ wineInfo }) {
   //     description: "바닐라와 초콜릿 향을 느낄 수 있고 끝맛에 라즈베리의 향 또한 느껴집니다. 오크, 체리, 블랙프루트의 존재감이 살아있으며 볼드하고 훌륭한 와인입니다"
   // }
 
+  // 수정 : title : title
+  //        image : image
+  //        variety : variety
+  //        country : country
+  //        points : points
+  //        keyword : keyword
+
+  let keyword_to_sentence = "";
+
+  for (let i = 0; i < wineInfo.keyword.length; i++) {
+    keyword_to_sentence = keyword_to_sentence + "#" + wineInfo.keyword[i] + " ";
+  }
+
   const cardContent = (
     <React.Fragment>
       <Grid container>
@@ -28,15 +41,15 @@ export default function WineCard({ wineInfo }) {
               color="text.secondary"
               gutterBottom
             >
-              {wineInfo.type}
+              평점 : {wineInfo.points}
             </Typography>
             <Typography variant="h5" component="div">
               {wineInfo.title}
             </Typography>
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              {wineInfo.grape}, {wineInfo.location}
+              {wineInfo.variety}, {wineInfo.country}
             </Typography>
-            <Typography variant="body2">{wineInfo.description}</Typography>
+            <Typography variant="body2">{wineInfo.keyword}</Typography>
           </CardContent>
           <CardActions>
             <Button size="small">더보기</Button>
