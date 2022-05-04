@@ -13,7 +13,6 @@ import {
 import { styled, alpha } from '@mui/material/styles';
 import Header from "../components/Header";
 import SearchIcon from '@mui/icons-material/Search';
-import InputBase from '@mui/material/InputBase';
 import WineCard from "../components/WineCard";
 
 export default function MainPage() {
@@ -27,7 +26,6 @@ export default function MainPage() {
       setPointsValue(newValue);
     }
   };
-
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -55,24 +53,10 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
   justifyContent: 'center',
 }));
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
-    },
-  },
-}));
-
   return (
     <>
       <Header />
-      <Container maxWidth="lg" style={{ marginTop: "20px" }} component="div" xs="1">
+      <Container maxWidth="lg" className="mt-3" component="div" xs="1">
         <Grid container component="div" sx={{ border: "1px solid lightgray", p: 3 }} spacing={2}>
           <Grid item xs="6" component="div" sx={{ mb: 3, borderRight: "1px grey solid" }}>
             <FormLabel sx={{ mr: 2 }}>Tags</FormLabel><br />
@@ -154,17 +138,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
               {pointsValue[0]} ~ {pointsValue[1]} 점
             </Box>
           </Grid>
-        </Grid>
-
-        <Search sx={{border: "1px black solid", margin: 3}} >
+          <Search sx={{border: "1px black solid", margin: 3}} >
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
           </Search>
+        </Grid>
 
         <Grid container xs={12} spacing={1}>
           <Grid item xs={4}>
