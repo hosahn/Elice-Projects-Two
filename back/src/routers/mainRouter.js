@@ -17,7 +17,7 @@ mainRouter.get(
   errorMiddleware,
 );
 
-mainRouter.get(
+mainRouter.post(
   "/main/search",
   async function (req, res) {
     try {
