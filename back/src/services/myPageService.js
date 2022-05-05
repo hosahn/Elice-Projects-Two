@@ -1,4 +1,5 @@
 import { User } from "../db/index.js";
+import bcrypt from "bcrypt";
 
 class myPageService {
   static async getLikedWines({ user_id }) {
@@ -27,7 +28,7 @@ class myPageService {
 
     if (toUpdate.password) {
       const fieldToUpdate = "password";
-      const newValue = toUpdate.password;
+      const newValue = await bcrypt.hash(toUpdate.password, 10);
       user = await User.update({ user_id, fieldToUpdate, newValue });
     }
 
