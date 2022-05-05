@@ -20,7 +20,7 @@ export default function Cardlist() {
   return (
     <>
 {itemData.map((item) => (
-  
+<Card container xs={12} spacing={2}>
 <Card sx={{ maxWidth: 200 } } >
       <CardMedia
         component="img"
@@ -59,6 +59,7 @@ export default function Cardlist() {
       </CardActions>
       
     </Card>
+    </Card>
      ))}
 
 
@@ -82,27 +83,12 @@ const itemData = [
   {
     img: 'logo512.png',
     title: '노서현',
-    author: 'FE',
-    github: 'https://naver.com',
-  },
-  {
-    img: 'https://ifh.cc/v-cg80Gr',
-    title: '심은지',
     author: 'BE',
     github: 'https://naver.com',
+    something: 'https://google.com',
+    rows: 2,
+    cols: 2,
+    featured: true,
   },
-  {
-    img: 'https://ifh.cc/v-cg80Gr',
-    title: '명하준',
-    author: 'FE',
-    github: 'https://naver.com',
-  },
-  {
-    img: 'https://ifh.cc/v-cg80Gr',
-    title: '김효진',
-    author: 'FE',
-    github: 'https://naver.com',
-  },
-  
   
 ];
