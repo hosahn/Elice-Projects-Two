@@ -4,7 +4,6 @@ import {
   Button,
   Divider,
   Grid,
-  Input,
   List,
   ListItem,
   ListItemText,
@@ -16,6 +15,10 @@ import * as Api from "../api";
 import Header from "../components/Header";
 import { UserStateContext } from "../App";
 import WineCard from "../components/WineCard";
+
+const StyledTextField = styled(TextField)(() => ({
+  marginBottom: "15px",
+}));
 
 export default function MyPage() {
   const navigate = useNavigate();
@@ -36,25 +39,21 @@ export default function MyPage() {
       setFavoriteWines(data[0]);
     };
 
-    const updateUserInfo = async () => {
-      const res = await Api.put(`myPage/${user.id}/reset`, newUser);
-      console.log(res);
-    };
-
     if (selectedMenu === "좋아요한 와인") {
       getFavoriteWines();
     }
-  }, [selectedMenu]);
+  }, [selectedMenu, user]);
 
   const handleValueChange = (name, value) => {
     setNewUser(prev => ({ ...prev, [name]: value }));
-    console.log(name, value);
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    // console.log(newUser);
-    // newUser -> name, password 만
+
+    user.name = newUser.name;
+    const res = await Api.put(`myPage/${user.id}/reset`, newUser);
+    console.log(res.data);
   };
 
   return (
@@ -66,6 +65,7 @@ export default function MyPage() {
             component="nav"
             style={{
               width: "200px",
+              maxHeight: "100px",
               border: "1px solid lightgray",
               borderRadius: "5px",
               marginTop: "100px",
@@ -94,15 +94,15 @@ export default function MyPage() {
         <Grid item xs={8} style={{ paddingTop: "40px" }}>
           {selectedMenu === "회원정보 수정" ? (
             <form onSubmit={handleSubmit}>
-              <TextField label="email" value={user.email} />
+              <StyledTextField label="email" value={user.email} />
               <br />
-              <TextField
+              <StyledTextField
                 label="name"
                 value={newUser.name}
                 onChange={e => handleValueChange("name", e.currentTarget.value)}
               />
               <br />
-              <TextField
+              <StyledTextField
                 label="password"
                 value={newUser.password}
                 onChange={e =>
@@ -110,7 +110,7 @@ export default function MyPage() {
                 }
               />
               <br />
-              <TextField label="tier" value={user.tier} />
+              <StyledTextField label="tier" value={user.tier} />
               <br />
               <Button variant="contained" type="submit">
                 회원정보 수정
