@@ -7,6 +7,7 @@ export default function AboutPage() {
   return (
     <>
       <Header />
+      <img src={`logo512.png`}></img>
       <Cardlist />
       <div>AboutPage</div>
     </>

@@ -7,69 +7,98 @@ import ListSubheader from '@mui/material/ListSubheader';
 import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/Info';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+
 
 export default function Cardlist() {
   return (
-    <Box sx={{ width: 800, height: 100}} >
-      <ImageList  cols={5} gap={10}>
-        {itemData.map((item) => (
-          <ImageListItem key={item.img}>
-            <img
-              src={`${item.img}?w=248&fit=crop&auto=format`}
-              srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-              alt={item.title}
-              loading="lazy"
-            />
-            <ImageListItemBar
-            title={item.title}
-            subtitle={item.author}
-            actionIcon={
+    <>
+{itemData.map((item) => (
+  
+<Card sx={{ maxWidth: 200 } } >
+      <CardMedia
+        component="img"
+        height="140"
+        image={item.img}
+        alt="green iguana"
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          {item.title}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {item.author}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        
+        {
                 <IconButton
-                sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                aria-label={`info about ${item.title}`}
+                sx={{ color: 'rgba(215, 25, 235, 0.54)' }}
+                a target="_blank" href={item.something}
+              >
+                <GitHubIcon />
+              </IconButton>
+              
+            }
+            {
+                <IconButton
+                sx={{ color: 'rgba(25, 25, 255, 0.54)' }}
                 a target="_blank" href={item.github}
               >
                 <GitHubIcon />
               </IconButton>
+              
             }
-          />
-          </ImageListItem>
-        ))}
-      </ImageList>
-    </Box>
+      </CardActions>
+      
+    </Card>
+     ))}
+
+
+
+    
+    </>
   );
 }
 
 const itemData = [
   {
-    img: '/img/wine1.jpg',
+    img: 'logo512.png',
     title: '이호산(팀장)',
     author: 'BE',
     github: 'https://naver.com',
+    something: 'https://google.com',
     rows: 2,
     cols: 2,
     featured: true,
   },
   {
-    img: '/img/wine2.jpg',
+    img: 'logo512.png',
     title: '노서현',
     author: 'FE',
     github: 'https://naver.com',
   },
   {
-    img: '/img/wine6.jpg',
+    img: 'https://ifh.cc/v-cg80Gr',
     title: '심은지',
     author: 'BE',
     github: 'https://naver.com',
   },
   {
-    img: '/img/wine4.jpg',
+    img: 'https://ifh.cc/v-cg80Gr',
     title: '명하준',
     author: 'FE',
     github: 'https://naver.com',
   },
   {
-    img: '/img/wine5.jpg',
+    img: 'https://ifh.cc/v-cg80Gr',
     title: '김효진',
     author: 'FE',
     github: 'https://naver.com',
