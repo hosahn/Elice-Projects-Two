@@ -19,14 +19,15 @@ class detailService {
     return result;
   }
   //설명추가
-  static async clickWine({ index, user_id, bool }) {
-    if (bool == 0) {
-      const likeWine = User.likedWine({ user_id, index });
-      return likeWine;
-    } else {
-      const dislikedWine = User.disLikedWine({ user_id, index });
-      return dislikedWine;
+  static async clickWine({ index, user_id }) {
+    const hasWine = await User.hasFavoriteWine({ index, user_id });
+    if (hasWine) {
+      return await User.removeFavoriteWine({
+        user_id,
+        index,
+      });
     }
+    return await User.addFavoriteWine({ user_id, index });
   }
 }
 export { detailService };
