@@ -45,12 +45,9 @@ Drink Easy, Drunken Rabbit!
 
 **기술 스택**
 
-1. Front-End
- - HTML, CSS, JS, React
-2. Back-End
- - JS, NodeJS, MongoDB
-3. Data Analysis
- - Python, Jupyter, Google Cloud Platform
+1. Front-End : HTML, CSS, JS, React
+2. Back-End : JS, NodeJS, MongoDB
+3. Data Analysis : Python, Jupyter, Google Cloud Platform
 
 **활용 라이브러리**
 
