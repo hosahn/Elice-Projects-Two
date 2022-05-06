@@ -99,6 +99,7 @@ for i in range(wines) :
         similarity = word2vecdistance(wines[i], wines[j])
         if similarity > top3_similarity :
             min(top3_similarity) = top3_similarity
+#완전 탐색으로, 약 하루 + 6시간 정도의 시간이 소요되었습니다
 ```
 
 ## 프로젝트 구상도
