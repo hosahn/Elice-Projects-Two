@@ -75,16 +75,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
       <Container maxWidth="lg" style={{ marginTop: "20px" }} component="div" xs="1">
         <Grid container component="div" sx={{ border: "1px solid lightgray", p: 3 }} spacing={3}>
           <Grid item xs="4" component="div" sx={{ mb: 3, borderRight: "1px grey solid"}}>
-          <Box
-          component="div"
-          sx={{ mb: 3.5 }}
-          style={{ display: "flex", alignItems: "center" }} spacing={4}>
-          <div> <img src={data?.result?.[0]["image"]} alt="mainImage" />
-          </div>
+            <Box
+              component="div"
+              sx={{ mb: 3.5 }}
+              style={{ display: "flex", alignItems: "center" }} spacing={4}>
+              <div> 
+                <img src={data?.result?.[0]["image"]} alt="mainImage" />
+              </div>
+              
+            
           
-        
-        
-      </Box>
+            </Box>
 
           </Grid>
 
