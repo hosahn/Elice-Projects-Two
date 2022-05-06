@@ -1,17 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import Header from "../components/Header";
 import { useParams, NavLink } from "react-router-dom";
+import WineCard from "../components/WineCard";
+import { UserStateContext } from "../App";
+import * as Api from "../api";
 
 export default function DetailPage() {
   const params = useParams();
   const [data, setData] = useState();
+  const { user } = useContext(UserStateContext);
 
   useEffect(() => {
     axios.get(`http://localhost:5001/detail/${params.index}`).then(res => {
       setData(res.data);
     });
   }, [params]);
+
+  const likeHandler = () => {
+    console.log(user);
+    console.log(data?.result?.[0]);
+    Api.post(`detail/${params.index}`, {
+      user_id: user.id,
+      bool: user.liked.includes(String(data?.result?.[0]["index"])) ? 1 : 0, //1이 좋아요 눌러놓은 상태, 0이 안누른상태
+    }).then(res => {});
+  };
 
   return (
     <>
@@ -28,6 +41,8 @@ export default function DetailPage() {
           <p>{data?.result?.[0]["country"]}</p>
         </div>
       </div>
+
+      <button onClick={likeHandler}>좋아요</button>
 
       <h2>{data?.result?.[0]["title"]}과 비슷한 술입니다!</h2>
       <div style={{ display: "flex" }}>
@@ -59,8 +74,22 @@ export default function DetailPage() {
 
       <h2>{data?.result?.[0]["title"]}과 잘 어울리는 안주입니다!</h2>
       <div style={{ display: "flex" }}>
-        <p>{data?.result?.[0]["snack1"]}</p>
-        <p>{data?.result?.[0]["snack2"]}</p>
+        <div>
+          <img
+            src="https://cdn.pixabay.com/photo/2016/05/17/09/27/fruit-1397736__480.jpg"
+            alt="snack2"
+            style={{ width: "200px", height: "300px" }}
+          />
+          <p>{data?.result?.[0]["snack1"]}</p>
+        </div>
+        <div>
+          <img
+            src="https://cdn.pixabay.com/photo/2016/05/17/09/27/fruit-1397736__480.jpg"
+            alt="snack2"
+            style={{ width: "200px", height: "300px" }}
+          />
+          <p>{data?.result?.[0]["snack2"]}</p>
+        </div>
       </div>
     </>
   );

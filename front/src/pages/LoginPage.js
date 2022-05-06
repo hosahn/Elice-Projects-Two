@@ -7,6 +7,8 @@ import Header from "../components/Header";
 import Alert from "../components/Alert";
 import { DispatchContext } from "../App";
 
+import "./index.css"
+
 export default function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useContext(DispatchContext);
@@ -40,7 +42,7 @@ export default function LoginPage() {
 
       dispatch({
         type: "LOGIN_SUCCESS",
-        payload: user,
+        payload: data,
       });
 
       navigate("/main");
@@ -64,42 +66,52 @@ export default function LoginPage() {
           handleAlertClose={handleAlertClose}
         />
       )}
-      <form
+      <div
+        className="signin-container"
         style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "30px",
+          backgroundImage: "url(" + process.env.PUBLIC_URL + "/wine-background.jpg)",
         }}
-        onSubmit={handleFormSubmit}
       >
-        <Typography
-          variant="h4"
-          component="div"
-          style={{ marginBottom: "30px" }}
+        <form
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          onSubmit={handleFormSubmit}
         >
-          Login
-        </Typography>
-        <TextField
-          label="email"
-          type="email"
-          onChange={e => handleValueChange("email", e.target.value)}
-        ></TextField>
-        <br />
-        <TextField
-          label="pw"
-          type="password"
-          onChange={e => handleValueChange("password", e.target.value)}
-        ></TextField>
-        <br />
-        <Button variant="outlined" type="submit">
-          Login
-        </Button>
-        <Link to="/user/register" style={{ marginTop: "10px", color: "gray" }}>
-          회원이 아니신가요?
-        </Link>
-      </form>
+          <div className="signin-card">
+            <Typography
+              variant="h4"
+              component="div"
+              style={{ marginBottom: "30px", color: "#FFF"}}
+            >
+              Login
+            </Typography>
+            <TextField
+              label="email"
+              type="email"
+              onChange={e => handleValueChange("email", e.target.value)}
+              sx={{backgroundColor: "#FFF", borderRadius: "4px"}}
+            ></TextField>
+            <br />
+            <TextField
+              label="pw"
+              type="password"
+              onChange={e => handleValueChange("password", e.target.value)}
+              sx={{backgroundColor: "#FFF", borderRadius: "4px"}}
+            ></TextField>
+            <br />
+            <Button variant="contained" type="submit">
+              Login
+            </Button>
+            <Link to="/user/register" style={{ marginTop: "10px", color: "#FFF" }}>
+              회원이 아니신가요?
+            </Link>
+          </div>
+        </form>
+      </div>
     </>
   );
 }
