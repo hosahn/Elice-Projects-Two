@@ -268,6 +268,7 @@ export default function MainPage() {
                     location: wine.region_1,
                     type: wine.keyword.join(" "),
                     description: wine.description,
+                    index: wine.index,
                   }}
                 />
               </Grid>

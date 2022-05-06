@@ -21,7 +21,7 @@ export default function WineCard({ wineInfo }) {
   const cardContent = (
     <React.Fragment>
       <Grid container>
-        <Grid item xs={9} sx={{zIndex: 3}}>
+        <Grid item xs={9} sx={{ zIndex: 3 }}>
           <CardContent>
             <Typography
               sx={{ fontSize: 14 }}
@@ -39,12 +39,14 @@ export default function WineCard({ wineInfo }) {
             <Typography variant="body2">{wineInfo.keyword}</Typography>
           </CardContent>
           <CardActions>
-            <Button size="small">더보기</Button>
+            <Button size="small" href={"/detail/" + wineInfo.index}>
+              더보기
+            </Button>
           </CardActions>
         </Grid>
         <Grid item xs={3}>
           <img
-            style={{ width:"100%" }} 
+            style={{ width: "100%" }}
             src={process.env.PUBLIC_URL + wineInfo.url}
             alt={wineInfo.title}
           />
