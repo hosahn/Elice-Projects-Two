@@ -39,7 +39,7 @@ class User {
     return result[0].liked;
   }
 
-  static async likedWine({ user_id, index }) {
+  static async addFavoriteWine({ user_id, index }) {
     const filter = { id: user_id };
     const update = { $addToSet: { liked: index } };
     const option = { returnOriginal: true };
@@ -48,19 +48,27 @@ class User {
       update,
       option,
     );
-    return updatedUser;
+    return updatedUser ? true : false;
   }
 
-  static async disLikedWine({ user_id, index }) {
+  static async hasFavoriteWine({ user_id, index }) {
+    const wine = await UserModel.findOne({
+      id: user_id,
+      liked: { $in: [index] },
+    });
+    return wine ? true : false;
+  }
+
+  static async removeFavoriteWine({ user_id, index }) {
     const filter = { id: user_id };
-    const update = { $pull: { liked: index } };
+    const update = { $pull: { liked: index } }; //
     const option = { returnOriginal: true };
     const updatedUser = await UserModel.findOneAndUpdate(
       filter,
       update,
       option,
     );
-    return updatedUser;
+    return updatedUser ? true : false;
   }
 }
 export { User };

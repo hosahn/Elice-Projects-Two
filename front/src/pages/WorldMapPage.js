@@ -5,11 +5,12 @@ import {
   Geography,
   ZoomableGroup,
 } from "react-simple-maps";
-import { Box, Container, Typography, Paper } from "@mui/material";
+import { Box, Container, Typography, Paper, Grid } from "@mui/material";
 
 import * as Api from "../api";
 import Header from "../components/Header";
 import { countryGrades } from "../constants/Country";
+import WineCard from "../components/WineCard";
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
@@ -113,7 +114,17 @@ function MapChart() {
           </Paper>
         )}
 
-        {/* isExist && 와인 카드 */}
+        {isExist && (
+          <Grid container xs={12} spacing={1}>
+            {wine.map(wine => {
+              return (
+                <Grid item xs={4}>
+                  <WineCard wineInfo={wine} />
+                </Grid>
+              );
+            })}
+          </Grid>
+        )}
       </Container>
     </>
   );

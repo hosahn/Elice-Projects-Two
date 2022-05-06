@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import Header from "../components/Header";
 import { useParams, NavLink } from "react-router-dom";
@@ -17,10 +17,13 @@ import { styled, alpha } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import WineCard from "../components/WineCard";
+import { UserStateContext } from "../App";
+import * as Api from "../api";
 
 export default function DetailPage() {
   const params = useParams();
   const [data, setData] = useState();
+  const { user } = useContext(UserStateContext);
 
   useEffect(() => {
     axios.get(`http://localhost:5001/detail/${params.index}`).then(res => {
@@ -87,7 +90,35 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
           
             </Box>
 
-          </Grid>
+      <button onClick={likeHandler}>좋아요</button>
+
+      <h2>{data?.result?.[0]["title"]}과 비슷한 술입니다!</h2>
+      <div style={{ display: "flex" }}>
+        <div>
+          <img
+            src={data?.similar?.[0]}
+            style={{ width: "200px", height: "300px" }}
+            alt="similar1"
+          />
+          <p>{data?.result?.[0]["similar1"]}</p>
+        </div>
+        <div>
+          <img
+            src={data?.similar?.[1]}
+            style={{ width: "200px", height: "300px" }}
+            alt="similar2"
+          />
+          <p>{data?.result?.[0]["similar2"]}</p>
+        </div>
+        <div>
+          <img
+            src={data?.similar?.[2]}
+            style={{ width: "200px", height: "300px" }}
+            alt="similar3"
+          />
+          <p>{data?.result?.[0]["similar3"]}</p>
+        </div>
+      </div>
 
           <Grid item xs="6">
             <Box
