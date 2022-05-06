@@ -21,7 +21,7 @@ export default function WineCard({ wineInfo }) {
   const cardContent = (
     <React.Fragment>
       <Grid container>
-        <Grid item xs={9}>
+        <Grid item xs={9} sx={{zIndex: 3}}>
           <CardContent>
             <Typography
               sx={{ fontSize: 14 }}
@@ -44,7 +44,7 @@ export default function WineCard({ wineInfo }) {
         </Grid>
         <Grid item xs={3}>
           <img
-            style={{ height: "200px", transform: "scale(1.2)" }}
+            style={{ width:"100%" }} 
             src={process.env.PUBLIC_URL + wineInfo.url}
             alt={wineInfo.title}
           />
@@ -53,5 +53,5 @@ export default function WineCard({ wineInfo }) {
     </React.Fragment>
   );
 
-  return <Card sx={{ overflow: "visible" }}>{cardContent}</Card>;
+  return <Card>{cardContent}</Card>;
 }
