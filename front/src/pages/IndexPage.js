@@ -1,6 +1,5 @@
 import Header from "../components/Header";
 import * as React from "react";
-import ReactDOM from "react-dom";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -12,8 +11,8 @@ export default function IndexPage() {
   return (
     <>
       <Header />
-      <div className="index-content" />
       <div className="index-container" />
+      <div className="index-content" style={{ marginTop: "100vh" }} />
     </>
   );
 }
