@@ -103,6 +103,12 @@ export default function MainPage() {
     },
   ];
 
+  useEffect(() => {
+    Api.get("main").then(res => {
+      setWineInfos(res.data);
+    });
+  }, []);
+
   const handleChange = (e, newValue) => {
     if (e.target.name === "price") {
       setPriceValue(newValue);
