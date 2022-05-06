@@ -29,28 +29,28 @@ Drink Easy, Drunken Rabbit!
 **서비스 내 사용 데이터**
 
 1. Wine Reviews(<https://www.kaggle.com/datasets/zynicide/wine-reviews>)
-
-- 11만개 이상 와인 종에 대한 review가 모아져 있는 데이터.
-
-- 점수를 기준으로 모수를 줄일 수 있음
+ - 11만개 이상 와인 종에 대한 review가 모아져 있는 데이터.
+ - 점수를 기준으로 모수를 줄일 수 있음
 
 1. Wine Recommender
-- Wine 선택지의 다양함(선택의 어려움)을 보여주기 위한 dataset
-- A) 생산국의 다양성 B) 가격의 군집화를 하나의 데이터셋으로 시각화 가능
+ - Wine 선택지의 다양함(선택의 어려움)을 보여주기 위한 dataset
+ - A) 생산국의 다양성 B) 가격의 군집화를 하나의 데이터셋으로 시각화 가능
+
 1. Alcohol consumption per capita
-- 해가 갈수록 커지는 주류시장을 시각화하기 위해 사용한 dataset
+ - 해가 갈수록 커지는 주류시장을 시각화하기 위해 사용한 dataset
+ 
 1. 그 외 데이터셋
-- Selenium을 활용해 크롤링한 wine image url 데이터셋
-- Word2vec을 활용하여 만든 유사 와인 데이터셋(Wine Review와 결합)
+ - Selenium을 활용해 크롤링한 wine image url 데이터셋
+ - Word2vec을 활용하여 만든 유사 와인 데이터셋(Wine Review와 결합)
 
 **기술 스택**
 
 1. Front-End
-- HTML, CSS, JS, React
+ - HTML, CSS, JS, React
 1. Back-End
-- JS, NodeJS, MongoDB
+ - JS, NodeJS, MongoDB
 1. Data Analysis
-- Python, Jupyter, Google Cloud Platform
+ - Python, Jupyter, Google Cloud Platform
 
 **활용 라이브러리**
 
