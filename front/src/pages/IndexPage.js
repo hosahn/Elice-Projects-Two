@@ -1,6 +1,7 @@
 import Header from "../components/Header";
 import * as React from "react";
 import { Link } from "@mui/material";
+import Footer from "../components/Footer";
 
 export default function IndexPage() {
   return (
@@ -58,6 +59,8 @@ export default function IndexPage() {
           </Link>
         </span>
       </div>
+
+      <Footer />
     </>
   );
 }
