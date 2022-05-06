@@ -56,33 +56,72 @@ export default function IndexPage() {
       <div
         className="index-content"
         style={{
-          height: "1600px",
+          height: "1300px",
           background: "rgba(220, 20, 60, 0.7)",
           color: "#FFF",
           textAlign: "center",
         }}
       >
         <span className="title">why we service?</span>
-        <Grid container>
+        <Grid
+          container
+          sx={{
+            marginTop: "40px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: "20px",
+          }}
+          rowSpacing={3}
+        >
           <Grid item xs={12}>
-            <Box id="treeChart" sx={{ margin: "40px" }}></Box>
+            <span className="subtitle">너무 많은 와인생산국</span>
+          </Grid>
+          <Grid item xs={12}>
+            <Box id="treeChart"></Box>
           </Grid>
           <Grid
             item
-            xs={12}
+            xs={6}
             sx={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               padding: "auto",
+              background: "rgba(255, 255, 255, 0.5)",
+              borderRadius: "30px",
             }}
           >
             <Box id="pieChart"></Box>
           </Grid>
           <Grid item xs={6}>
+            <span className="subtitle">몰려있는 가격대</span>
+          </Grid>
+          <Grid item xs={4}>
+            <span className="subtitle">
+              높은 와인소비량,
+              <br />
+              늘어나는 와인소비량
+            </span>
+          </Grid>
+          <Grid
+            item
+            xs={4}
+            sx={{
+              background: "rgba(255, 255, 255, 0.5)",
+              borderRadius: "30px",
+            }}
+          >
             <Box id="barChart"></Box>
           </Grid>
-          <Grid item xs={6}>
+          <Grid
+            item
+            xs={4}
+            sx={{
+              background: "rgba(255, 255, 255, 0.5)",
+              borderRadius: "30px",
+            }}
+          >
             <Box id="lineChart"></Box>
           </Grid>
         </Grid>
