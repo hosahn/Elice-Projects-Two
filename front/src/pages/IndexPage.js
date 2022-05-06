@@ -6,7 +6,8 @@ export default function IndexPage() {
   return (
     <>
       <Header />
-      <div>IndexPage</div>
+      <div className="index-content" />
+      <div className="index-container" />
     </>
   );
 }
