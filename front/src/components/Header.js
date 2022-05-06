@@ -39,7 +39,7 @@ export default function Header() {
       <AppBar position="static">
         <Toolbar style={{ backgroundColor: "#CA2C57" }}>
           <Typography sx={{ flexGrow: 1 }}>
-            <Link to="/main">
+            <Link to="/">
               <img
                 src={process.env.PUBLIC_URL + "/logo512.png"}
                 alt="logo"
@@ -48,6 +48,14 @@ export default function Header() {
             </Link>
           </Typography>
 
+          <Button variant="text" color="primary" xs="1">
+            <Link
+              to="/main"
+              style={{ textDecoration: "none", color: "#FFFFFF" }}
+            >
+              Main
+            </Link>
+          </Button>
           <Button variant="text" color="primary" xs="1">
             <Link
               to="/world_map"
