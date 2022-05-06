@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Button,
@@ -15,6 +15,7 @@ import {
 import Header from "../components/Header";
 import SearchIcon from '@mui/icons-material/Search';
 import WineCard from "../components/WineCard";
+import axios from "axios";
 
 import * as Api from "../api"
 
@@ -169,16 +170,16 @@ const SubmitHandle = () => {
               <Input
                 type="text"
                 value={priceValue[0]}
-                onChange={(e)=>{
-                  setPriceValue([Number(e.target.value), priceValue[1]])
+                onChange={e => {
+                  setPriceValue([Number(e.target.value), priceValue[1]]);
                 }}
               />
               ~
               <Input
                 type="text"
                 value={priceValue[1]}
-                onChange={(e)=>{
-                  setPriceValue([priceValue[0], Number(e.target.value)])
+                onChange={e => {
+                  setPriceValue([priceValue[0], Number(e.target.value)]);
                 }}
               />
             </Box>
@@ -193,7 +194,7 @@ const SubmitHandle = () => {
                 value={pointsValue}
                 onChange={handleChange}
                 valueLabelDisplay="auto"
-                sx={{ width: 300, marginRight: 2}}
+                sx={{ width: 300, marginRight: 2 }}
               />
               {pointsValue[0]} ~ {pointsValue[1]} 점
             </Box>
