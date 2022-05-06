@@ -67,3 +67,17 @@
     }
 }
 
+@keyframes changeMovement {
+    from {
+        opacity: 0;
+        transform: translateY(2rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#root > div:nth-child(3) > span{
+    animation: changeMovement 1s ease-in-out;
+}

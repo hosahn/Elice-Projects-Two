@@ -41,6 +41,7 @@ export default function IndexPage() {
         className="index-content"
         style={{
           marginTop: "200px",
+          marginBottom: "100px",
           padding: "30px 0",
           height: "auto",
           background: "rgba(220, 20, 60, 0.7)",
