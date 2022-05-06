@@ -3,7 +3,17 @@ import * as React from "react";
 import { Link } from "@mui/material";
 import Footer from "../components/Footer";
 
+import { treedata } from "./indexData";
+import ApexCharts from "apexcharts";
+import { Box } from "@mui/system";
+
 export default function IndexPage() {
+  setTimeout(() => {
+    console.log("rendering charts");
+    const chart = new ApexCharts(document.querySelector("#chart"), treedata);
+    chart.render();
+  }, 1000);
+
   return (
     <>
       <Header />
@@ -28,12 +38,14 @@ export default function IndexPage() {
       <div
         className="index-content"
         style={{
+          height: "atuo",
           background: "rgba(220, 20, 60, 0.7)",
           color: "#FFF",
           textAlign: "center",
         }}
       >
         <span className="title">why we service?</span>
+        <Box id="chart"></Box>
       </div>
 
       {/* master, 와인 추천해주세요 */}
