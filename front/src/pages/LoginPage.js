@@ -81,31 +81,35 @@ export default function LoginPage() {
           }}
           onSubmit={handleFormSubmit}
         >
-          <Typography
-            variant="h4"
-            component="div"
-            style={{ marginBottom: "30px" }}
-          >
-            Login
-          </Typography>
-          <TextField
-            label="email"
-            type="email"
-            onChange={e => handleValueChange("email", e.target.value)}
-          ></TextField>
-          <br />
-          <TextField
-            label="pw"
-            type="password"
-            onChange={e => handleValueChange("password", e.target.value)}
-          ></TextField>
-          <br />
-          <Button variant="outlined" type="submit">
-            Login
-          </Button>
-          <Link to="/user/register" style={{ marginTop: "10px", color: "gray" }}>
-            회원이 아니신가요?
-          </Link>
+          <div className="signin-card">
+            <Typography
+              variant="h4"
+              component="div"
+              style={{ marginBottom: "30px", color: "#FFF"}}
+            >
+              Login
+            </Typography>
+            <TextField
+              label="email"
+              type="email"
+              onChange={e => handleValueChange("email", e.target.value)}
+              sx={{backgroundColor: "#FFF", borderRadius: "4px"}}
+            ></TextField>
+            <br />
+            <TextField
+              label="pw"
+              type="password"
+              onChange={e => handleValueChange("password", e.target.value)}
+              sx={{backgroundColor: "#FFF", borderRadius: "4px"}}
+            ></TextField>
+            <br />
+            <Button variant="contained" type="submit">
+              Login
+            </Button>
+            <Link to="/user/register" style={{ marginTop: "10px", color: "#FFF" }}>
+              회원이 아니신가요?
+            </Link>
+          </div>
         </form>
       </div>
     </>
