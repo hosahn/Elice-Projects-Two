@@ -15,6 +15,7 @@ import * as Api from "../api";
 import Header from "../components/Header";
 import { UserStateContext } from "../App";
 import WineCard from "../components/WineCard";
+import Footer from "../components/Footer";
 
 const StyledTextField = styled(TextField)(() => ({
   marginBottom: "15px",
@@ -127,6 +128,7 @@ export default function MyPage() {
           )}
         </Grid>
       </Grid>
+      <Footer />
     </>
   );
 }

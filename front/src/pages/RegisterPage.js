@@ -5,6 +5,7 @@ import { Button, TextField, Typography } from "@mui/material";
 import * as Api from "../api";
 import Header from "../components/Header";
 import Alert from "../components/Alert";
+import Footer from "../components/Footer";
 
 export default function RegisterPage() {
   const navigate = useNavigate();
@@ -133,6 +134,8 @@ export default function RegisterPage() {
           Register
         </Button>
       </form>
+
+      <Footer />
     </>
   );
 }

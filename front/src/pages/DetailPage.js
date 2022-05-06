@@ -5,6 +5,7 @@ import { useParams, NavLink } from "react-router-dom";
 import WineCard from "../components/WineCard";
 import { UserStateContext } from "../App";
 import * as Api from "../api";
+import Footer from "../components/Footer";
 
 export default function DetailPage() {
   const params = useParams();
@@ -91,6 +92,7 @@ export default function DetailPage() {
           <p>{data?.result?.[0]["snack2"]}</p>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

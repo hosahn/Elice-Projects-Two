@@ -2,6 +2,7 @@ import React from "react";
 
 import Header from "../components/Header";
 import Cardlist from "../components/Cardlist";
+import Footer from "../components/Footer";
 
 export default function AboutPage() {
   return (
@@ -9,6 +10,7 @@ export default function AboutPage() {
       <Header />
       <Cardlist />
       <div>AboutPage</div>
+      <Footer />
     </>
   );
 }
