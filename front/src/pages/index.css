@@ -1,7 +1,7 @@
 .index-container{
     width: 100%;
     height: 100vh;
-    margin: 0;
+    margin: -81.5px 0 0 0;
     position: fixed;
 
     z-index: -1;
@@ -13,14 +13,15 @@
 }
 
 .index-content{
+    margin: auto;
     width: 90%;
     height: 500px;
-    display: flex;
-
-    margin: auto;
-    background-color: rgba(220, 20, 60, 0.7);
 
     z-index: 3;
+}
+
+.index-content > .title {
+    font-size: 85px;
 }
 
 .signin-container{
@@ -47,3 +48,22 @@
     border-radius: 15px;
     background-color: rgba(220, 20, 60, 0.7);
 }
+
+.underline {
+    background-image: linear-gradient(
+        transparent calc(100% - 1.5rem),
+        rgba(220, 20, 60, 0.7) 1.5rem
+    );
+    background-repeat: no-repeat;
+    animation: underlineAnim 2s ease-in-out;
+}
+
+@keyframes underlineAnim {
+    from {
+        background-size: 0% 100%;
+    }
+    to {
+        background-size: 100% 100%;
+    }
+}
+
