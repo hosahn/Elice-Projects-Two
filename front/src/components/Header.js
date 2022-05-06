@@ -103,8 +103,14 @@ export default function Header() {
                     My Page
                   </Link>
                 </MenuItem>
-                <MenuItem style={{ fontSize: "14px" }} onClick={logout}>
-                  Logout
+                <MenuItem style={{ fontSize: "14px" }}>
+                  <Link
+                    to="/main"
+                    style={{ textDecoration: "none", color: "#000000" }}
+                    onClick={logout}
+                  >
+                    Logout
+                  </Link>
                 </MenuItem>
               </Menu>
             </div>
