@@ -8,29 +8,33 @@ import ApexCharts from "apexcharts";
 import { Box } from "@mui/system";
 
 export default function IndexPage() {
-  setTimeout(() => {
-    console.log("rendering charts");
-    const treeChart = new ApexCharts(
-      document.querySelector("#treeChart"),
-      treeData,
-    );
-    const pieChart = new ApexCharts(
-      document.querySelector("#pieChart"),
-      pieData,
-    );
-    const barChart = new ApexCharts(
-      document.querySelector("#barChart"),
-      barData,
-    );
-    const lineChart = new ApexCharts(
-      document.querySelector("#lineChart"),
-      lineData,
-    );
-    treeChart.render();
-    pieChart.render();
-    barChart.render();
-    lineChart.render();
-  }, 1000);
+  const isRendered = React.useRef(false);
+  React.useEffect(() => {
+    if (!isRendered.current) {
+      console.log("rendering charts");
+      const treeChart = new ApexCharts(
+        document.querySelector("#treeChart"),
+        treeData,
+      );
+      const pieChart = new ApexCharts(
+        document.querySelector("#pieChart"),
+        pieData,
+      );
+      const barChart = new ApexCharts(
+        document.querySelector("#barChart"),
+        barData,
+      );
+      const lineChart = new ApexCharts(
+        document.querySelector("#lineChart"),
+        lineData,
+      );
+      treeChart.render();
+      pieChart.render();
+      barChart.render();
+      lineChart.render();
+      isRendered.current = true;
+    }
+  }, []);
 
   return (
     <>
