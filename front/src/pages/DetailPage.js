@@ -27,7 +27,7 @@ export default function DetailPage() {
   const { user } = useContext(UserStateContext);
 
   useEffect(() => {
-    axios.get(`http://localhost:5001/detail/${params.index}`).then(res => {
+    Api.get(`detail/${params.index}`).then(res => {
       setData(res.data);
     });
   }, [params]);
