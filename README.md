@@ -59,7 +59,7 @@
 - Word2vec
 - Chart.js
 - worldMap.js
-- genism
+- genism (wmdistance 적용)
 
 ## 프로젝트의 개요 및 목표                                  
  
