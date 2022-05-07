@@ -21,17 +21,19 @@ import WineCard from "../components/WineCard";
 import IconButton from "@mui/material/IconButton";
 import InfoIcon from "@mui/icons-material/Info";
 import GitHubIcon from "@mui/icons-material/GitHub";
-
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import { UserStateContext } from "../App";
 import * as Api from "../api";
+import Footer from "../components/Footer";
 
 export default function DetailPage() {
   const params = useParams();
   const [data, setData] = useState();
   const { user } = useContext(UserStateContext);
+  const [isLiked, setisLiked] = useState("000000" );
 
   useEffect(() => {
-    axios.get(`http://localhost:5001/detail/${params.index}`).then(res => {
+    Api.get(`detail/${params.index}`).then(res => {
       setData(res.data);
     });
   }, [params]);
@@ -39,12 +41,12 @@ export default function DetailPage() {
   const likeHandler = () => {
     console.log(user);
     console.log(data?.result?.[0]);
+    setisLiked(isLiked=="rgba(215, 25, 235, 0.54)"?"000000":"rgba(215, 25, 235, 0.54)");
     Api.post(`detail/${params.index}`, {
     user_id: user.id,
     
     }).then(res => {});
     };
-
 
   const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -119,13 +121,8 @@ export default function DetailPage() {
             </Box>
           </Grid>
 
-          {/* <button >좋아요</button>  */}
-                  <IconButton
-                    sx={{ color: "rgba(215, 25, 235, 0.54)" }}
-                    onClick={likeHandler}
-                  >
-                    <GitHubIcon />
-                  </IconButton>
+         
+                  
 
           <Grid item xs="6">
             <Box
@@ -140,6 +137,13 @@ export default function DetailPage() {
                 <p>설명: {data?.result?.[0]["description"]}</p>
                 <p>가격: ${data?.result?.[0]["price"]}</p>
                 <p>원산지: {data?.result?.[0]["country"]}</p>
+                <IconButton
+                    
+                    sx={{color:isLiked}}                  
+                    onClick={likeHandler}
+                  >
+                    <FavoriteIcon />
+                  </IconButton>
               </div>
                   
                 
@@ -194,13 +198,16 @@ export default function DetailPage() {
             </Box>
           </Grid>
         </Grid>
-
+        
         <Grid>
           {" "}
           <h2>{data?.result?.[0]["title"]}과 잘 어울리는 안주</h2>
         </Grid>
+
         <Grid container xs={12} spacing={1}>
-          <Grid
+          
+        
+        <Grid
             item
             xs={4}
             sx={{ border: "1px solid lightgray", p: 2 }}
@@ -220,7 +227,7 @@ export default function DetailPage() {
           <Grid item xs={4} sx={{ border: "1px solid lightgray", p: 2 }}>
             <div>
               <img
-                src={data?.result?.[0]["snackImage1"]}
+                src={data?.result?.[0]["snackImage2"]}
                 alt="snack2"
                 style={{ width: "200px", height: "300px" }}
               />

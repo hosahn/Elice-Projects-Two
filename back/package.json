@@ -4,6 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start" : "npm run server",
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon --exec babel-node --es-module-specifier-resolution=node index.js",
     "db": "nodemon ./src/db/index.js ",

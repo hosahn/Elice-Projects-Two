@@ -11,6 +11,7 @@ import * as Api from "../api";
 import Header from "../components/Header";
 import { countryGrades } from "../constants/Country";
 import WineCard from "../components/WineCard";
+import Footer from "../components/Footer";
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
@@ -116,9 +117,10 @@ function MapChart() {
 
         {isExist && (
           <Grid container xs={12} spacing={1}>
-            {wine.map(wine => {
+            {wine.map((wine, idx) => {
+              console.log(wine);
               return (
-                <Grid item xs={4}>
+                <Grid key={`world-wine-${idx}`} item xs={4}>
                   <WineCard wineInfo={wine} />
                 </Grid>
               );
@@ -126,6 +128,7 @@ function MapChart() {
           </Grid>
         )}
       </Container>
+      <Footer />
     </>
   );
 }
