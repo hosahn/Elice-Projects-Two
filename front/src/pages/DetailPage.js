@@ -21,7 +21,7 @@ import WineCard from "../components/WineCard";
 import IconButton from "@mui/material/IconButton";
 import InfoIcon from "@mui/icons-material/Info";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { UserStateContext } from "../App";
 import * as Api from "../api";
 import Footer from "../components/Footer";
@@ -30,23 +30,27 @@ export default function DetailPage() {
   const params = useParams();
   const [data, setData] = useState();
   const { user } = useContext(UserStateContext);
-  const [isLiked, setisLiked] = useState("000000" );
+  const [isLiked, setisLiked] = useState("000000");
 
   useEffect(() => {
     Api.get(`detail/${params.index}`).then(res => {
       setData(res.data);
+      console.log(res.data);
     });
   }, [params]);
-  
+
   const likeHandler = () => {
     console.log(user);
     console.log(data?.result?.[0]);
-    setisLiked(isLiked=="rgba(215, 25, 235, 0.54)"?"000000":"rgba(215, 25, 235, 0.54)");
+    setisLiked(
+      isLiked === "rgba(215, 25, 235, 0.54)"
+        ? "000000"
+        : "rgba(215, 25, 235, 0.54)",
+    );
     Api.post(`detail/${params.index}`, {
-    user_id: user.id,
-    
+      user_id: user.id,
     }).then(res => {});
-    };
+  };
 
   const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -61,30 +65,6 @@ export default function DetailPage() {
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(3),
       width: "auto",
-    },
-  }));
-
-  const SearchIconWrapper = styled("div")(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  }));
-
-  const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: "inherit",
-    "& .MuiInputBase-input": {
-      padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-      transition: theme.transitions.create("width"),
-      width: "100%",
-      [theme.breakpoints.up("md")]: {
-        width: "20ch",
-      },
     },
   }));
 
@@ -121,9 +101,6 @@ export default function DetailPage() {
             </Box>
           </Grid>
 
-         
-                  
-
           <Grid item xs="6">
             <Box
               component="div"
@@ -137,16 +114,10 @@ export default function DetailPage() {
                 <p>설명: {data?.result?.[0]["description"]}</p>
                 <p>가격: ${data?.result?.[0]["price"]}</p>
                 <p>원산지: {data?.result?.[0]["country"]}</p>
-                <IconButton
-                    
-                    sx={{color:isLiked}}                  
-                    onClick={likeHandler}
-                  >
-                    <FavoriteIcon />
-                  </IconButton>
+                <IconButton sx={{ color: isLiked }} onClick={likeHandler}>
+                  <FavoriteIcon />
+                </IconButton>
               </div>
-                  
-                
             </Box>
           </Grid>
         </Grid>
@@ -170,21 +141,26 @@ export default function DetailPage() {
             </Box>
           </Grid>
           <Grid item xs={4} sx={{ border: "1px solid lightgray", p: 2 }}> */}
-          
+
           <Grid container xs={12} spacing={1}>
-            {data?.similar?.map((wineImage, idx) => {
-              
+            {data?.similar?.map((wine, idx) => {
               return (
                 <Grid key={`world-wine-${idx}`} item xs={4}>
-                  <WineCard wineInfo={{
-                    image: wineImage, 
-                    title: data.result[0][`similar${idx+1}`]
-                    }} />
+                  <WineCard
+                    wineInfo={{
+                      title: wine.title,
+                      image: wine.image,
+                      location: wine.region_1,
+                      type: wine.keyword.join(" "),
+                      description: wine.description,
+                      index: wine.index,
+                    }}
+                  ></WineCard>
                 </Grid>
               );
             })}
           </Grid>
-            {/* <Box
+          {/* <Box
               component="div"
               sx={{ mb: 3.5 }}
               style={{ display: "flex", alignItems: "center" }}
@@ -212,16 +188,14 @@ export default function DetailPage() {
             </Box> */}
           {/* </Grid> */}
         </Grid>
-        
+
         <Grid>
           {" "}
           <h2>{data?.result?.[0]["title"]}과 잘 어울리는 안주</h2>
         </Grid>
 
         <Grid container xs={12} spacing={1}>
-          
-        
-        <Grid
+          <Grid
             item
             xs={4}
             sx={{ border: "1px solid lightgray", p: 2 }}
