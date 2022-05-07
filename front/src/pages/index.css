@@ -1,0 +1,87 @@
+.index-container{
+    width: 100%;
+    height: 100vh;
+    margin: -81.5px 0 0 0;
+    position: fixed;
+
+    z-index: -1;
+
+    background-image: url("../../public/wine-background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.index-content{
+    margin: auto;
+    width: 90%;
+    height: 500px;
+
+    z-index: 3;
+}
+
+.index-content > .title {
+    font-size: 85px;
+}
+
+.subtitle{
+    font-size: 40px;
+}
+
+.signin-container{
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+
+    background-image: url("../../public/wine-background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.signin-card{
+    width: 40%;
+    margin-top: 80px;
+    padding: 20px 0px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 15px;
+    background-color: rgba(220, 20, 60, 0.7);
+}
+
+.underline {
+    background-image: linear-gradient(
+        transparent calc(100% - 1.5rem),
+        rgba(220, 20, 60, 0.7) 1.5rem
+    );
+    background-repeat: no-repeat;
+    animation: underlineAnim 2s ease-in-out;
+}
+
+@keyframes underlineAnim {
+    from {
+        background-size: 0% 100%;
+    }
+    to {
+        background-size: 100% 100%;
+    }
+}
+
+@keyframes changeMovement {
+    from {
+        opacity: 0;
+        transform: translateY(2rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#root > div:nth-child(3) > span{
+    animation: changeMovement 1s ease-in-out;
+}

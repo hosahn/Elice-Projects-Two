@@ -26,4 +26,11 @@ detailRouter.get(
   errorMiddleware,
 );
 
+detailRouter.post("/detail/:index", async (req, res) => {
+  const index = req.params.index;
+  const { user_id } = req.body;
+  const result = await detailService.clickWine({ index, user_id });
+  res.send(result);
+});
+
 export { detailRouter };

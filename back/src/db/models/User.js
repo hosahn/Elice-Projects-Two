@@ -2,7 +2,6 @@ import { UserModel } from "../schemas/user.js";
 
 class User {
   static async create({ newUser }) {
-    console.log(newUser);
     const createdNewUser = await UserModel.create(newUser);
     return createdNewUser;
   }
@@ -35,26 +34,41 @@ class User {
     return updatedUser;
   }
 
-  static async likedWine({ user_id, wine }) {
-    const filter = { id: user_id };
-    const update = { $addToSet: { liked: [{ mid: wine }] } };
-    const option = { returnOriginal: false };
-    const updatedUser = await UserModel.findOneAndUpdate(
-      filter,
-      update,
-      option,
-    );
+  static async getLikedWines({ user_id }) {
+    const result = await UserModel.find({ id: user_id });
+    return result[0].liked;
   }
 
-  static async disLikedWine({ user_id, wine }) {
+  static async addFavoriteWine({ user_id, index }) {
     const filter = { id: user_id };
-    const update = { $pull: { liked: wine } };
-    const option = { returnOriginal: false };
+    const update = { $addToSet: { liked: index } };
+    const option = { returnOriginal: true };
     const updatedUser = await UserModel.findOneAndUpdate(
       filter,
       update,
       option,
     );
+    return updatedUser ? true : false;
+  }
+
+  static async hasFavoriteWine({ user_id, index }) {
+    const wine = await UserModel.findOne({
+      id: user_id,
+      liked: { $in: [index] },
+    });
+    return wine ? true : false;
+  }
+
+  static async removeFavoriteWine({ user_id, index }) {
+    const filter = { id: user_id };
+    const update = { $pull: { liked: index } }; //
+    const option = { returnOriginal: true };
+    const updatedUser = await UserModel.findOneAndUpdate(
+      filter,
+      update,
+      option,
+    );
+    return updatedUser ? true : false;
   }
 }
 export { User };

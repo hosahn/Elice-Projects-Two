@@ -1,79 +1,60 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
-import ListSubheader from '@mui/material/ListSubheader';
-import IconButton from '@mui/material/IconButton';
-import InfoIcon from '@mui/icons-material/Info';
-import GitHubIcon from '@mui/icons-material/GitHub';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import ImageListItemBar from "@mui/material/ImageListItemBar";
+import ListSubheader from "@mui/material/ListSubheader";
+import IconButton from "@mui/material/IconButton";
+import InfoIcon from "@mui/icons-material/Info";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import EmailIcon from '@mui/icons-material/Email';
+import { createTheme, responsiveFontSizes } from "@mui/material/styles";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
 
-export default function Cardlist() {
+export default function Cardlist({ item }) {
   return (
-    <Box sx={{ width: 800, height: 100}} >
-      <ImageList  cols={5} gap={10}>
-        {itemData.map((item) => (
-          <ImageListItem key={item.img}>
-            <img
-              src={`${item.img}?w=248&fit=crop&auto=format`}
-              srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-              alt={item.title}
-              loading="lazy"
-            />
-            <ImageListItemBar
-            title={item.title}
-            subtitle={item.author}
-            actionIcon={
+    <>
+      <Grid item xs={2} sx={{ p: 1 }}>
+        <Card>
+          <Card sx={{ width: "100%" }}>
+            <CardMedia component="img" height="140" image={item.img} />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                {item.title}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {item.author}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              {
                 <IconButton
-                sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                aria-label={`info about ${item.title}`}
-                a target="_blank" href={item.github}
-              >
-                <GitHubIcon />
-              </IconButton>
-            }
-          />
-          </ImageListItem>
-        ))}
-      </ImageList>
-    </Box>
+                  sx={{ color: "#000000" }}
+                  target="_blank"
+                  href={item.github}
+                >
+                  <GitHubIcon />
+                </IconButton>
+              }
+              {
+                <IconButton
+                  sx={{ color: "#3366CC" }}
+                  target="_blank"
+                  href={item.email}
+                >
+                  <EmailIcon />
+                </IconButton>
+              }
+            </CardActions>
+          </Card>
+        </Card>
+      </Grid>
+    </>
   );
 }
-
-const itemData = [
-  {
-    img: '/img/wine1.jpg',
-    title: '이호산(팀장)',
-    author: 'BE',
-    github: 'https://naver.com',
-    rows: 2,
-    cols: 2,
-    featured: true,
-  },
-  {
-    img: '/img/wine2.jpg',
-    title: '노서현',
-    author: 'FE',
-    github: 'https://naver.com',
-  },
-  {
-    img: '/img/wine6.jpg',
-    title: '심은지',
-    author: 'BE',
-    github: 'https://naver.com',
-  },
-  {
-    img: '/img/wine4.jpg',
-    title: '명하준',
-    author: 'FE',
-    github: 'https://naver.com',
-  },
-  {
-    img: '/img/wine5.jpg',
-    title: '김효진',
-    author: 'FE',
-    github: 'https://naver.com',
-  },
-  
-  
-];
