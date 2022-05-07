@@ -2,7 +2,7 @@
 
 **20팀 프로젝트 : Drunken Rabbit**                         
 
-*Drink Easy, Drunken Rabbit*
+*Drink Easy, Drunken Rabbit.*
 
 와인 초보자들을 위한 와인 검색 및 정보 전달 서비스입니다.
 
