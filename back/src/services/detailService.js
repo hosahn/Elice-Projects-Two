@@ -14,7 +14,7 @@ class detailService {
     for (let i = 0; i < similarWine.length; i++) {
       const wineName = similarWine[i];
       const tmp = await Wine.FindByWineName({ wineName });
-      result.push(tmp[0]["image"]);
+      result.push(tmp[0]);
     }
     return result;
   }

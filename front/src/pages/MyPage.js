@@ -36,9 +36,12 @@ export default function MyPage() {
 
   useEffect(() => {
     const getFavoriteWines = async () => {
-      const { data } = await Api.get(`myPage/${user.id}`);
-      console.log(data);
-      setFavoriteWines(data[0]);
+      try {
+        const { data } = await Api.get(`myPage/${user.id}`);
+        setFavoriteWines(data);
+      } catch (err) {
+        console.log(err);
+      }
     };
 
     if (selectedMenu === "좋아요한 와인") {
@@ -54,8 +57,11 @@ export default function MyPage() {
     e.preventDefault();
 
     user.name = newUser.name;
-    const res = await Api.put(`myPage/${user.id}/reset`, newUser);
-    console.log(res.data);
+    try {
+      await Api.put(`myPage/${user.id}/reset`, newUser);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -93,10 +99,10 @@ export default function MyPage() {
           </List>
         </Grid>
 
-        <Grid item xs={8} style={{ paddingTop: "40px" }}>
+        <Grid item xs={8} style={{ paddingTop: "40px", minHeight: "80vh" }}>
           {selectedMenu === "회원정보 수정" ? (
             <form onSubmit={handleSubmit}>
-              <StyledTextField label="email" value={user.email} />
+              <StyledTextField label="email" value={user?.email} />
               <br />
               <StyledTextField
                 label="name"
@@ -112,17 +118,17 @@ export default function MyPage() {
                 }
               />
               <br />
-              <StyledTextField label="tier" value={user.tier} />
+              <StyledTextField label="tier" value={user?.tier} />
               <br />
               <Button variant="contained" type="submit">
                 회원정보 수정
               </Button>
             </form>
           ) : (
-            <Grid container xs={12} spacing={1}>
+            <Grid container spacing={1} style={{ marginBottom: "40px" }}>
               {favoriteWines?.map((wine, idx) => (
                 <Grid key={`favorite-wine-${idx}`} item xs={6}>
-                  <WineCard wineInfo={wine} />
+                  <WineCard wineInfo={wine?.[0]} />
                 </Grid>
               ))}
             </Grid>

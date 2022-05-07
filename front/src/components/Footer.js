@@ -8,9 +8,9 @@ export default function Footer() {
         flexGrow: 1,
         backgroundColor: "rgb(50, 50, 50)",
         color: "#FFF",
-        padding: "40px 0",
+        padding: "30px 0",
         textAlign: "center",
-        fontSize: "20px",
+        fontSize: "16px",
       }}
     >
       wine특별시 zinfandel구 320-14번지 | All Rights Reserved | Copyright 코딩의
