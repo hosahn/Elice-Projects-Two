@@ -183,7 +183,7 @@ export default function DetailPage() {
           >
             <div>
               <img
-                src="https://cdn.pixabay.com/photo/2016/05/17/09/27/fruit-1397736__480.jpg"
+                src={data?.result?.[0]["snackImage1"]}
                 alt="snack2"
                 style={{ width: "200px", height: "300px" }}
               />
@@ -195,7 +195,7 @@ export default function DetailPage() {
           <Grid item xs={4} sx={{ border: "1px solid lightgray", p: 2 }}>
             <div>
               <img
-                src="https://cdn.pixabay.com/photo/2016/05/17/09/27/fruit-1397736__480.jpg"
+                src={data?.result?.[0]["snackImage2"]}
                 alt="snack2"
                 style={{ width: "200px", height: "300px" }}
               />
