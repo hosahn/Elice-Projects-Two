@@ -265,7 +265,7 @@ export default function MainPage() {
                 <WineCard
                   wineInfo={{
                     title: wine.title,
-                    url: wine.image,
+                    image: wine.image,
                     location: wine.region_1,
                     type: wine.keyword.join(" "),
                     description: wine.description,

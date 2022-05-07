@@ -118,6 +118,7 @@ function MapChart() {
         {isExist && (
           <Grid container xs={12} spacing={1}>
             {wine.map((wine, idx) => {
+              console.log(wine);
               return (
                 <Grid key={`world-wine-${idx}`} item xs={4}>
                   <WineCard wineInfo={wine} />

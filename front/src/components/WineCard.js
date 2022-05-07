@@ -47,7 +47,7 @@ export default function WineCard({ wineInfo }) {
         <Grid item xs={3}>
           <img
             style={{ width: "100%" }}
-            src={process.env.PUBLIC_URL + wineInfo.url}
+            src={process.env.PUBLIC_URL + wineInfo.image}
             alt={wineInfo.title}
           />
         </Grid>

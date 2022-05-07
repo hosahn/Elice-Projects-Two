@@ -37,6 +37,7 @@ export default function MyPage() {
   useEffect(() => {
     const getFavoriteWines = async () => {
       const { data } = await Api.get(`myPage/${user.id}`);
+      console.log(data);
       setFavoriteWines(data[0]);
     };
 

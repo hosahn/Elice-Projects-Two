@@ -170,7 +170,6 @@ export default function DetailPage() {
             </Box>
           </Grid>
         </Grid>
-
         <Grid>
           {" "}
           <h2>{data?.result?.[0]["title"]}과 잘 어울리는 안주</h2>
@@ -205,7 +204,6 @@ export default function DetailPage() {
           </Grid>
         </Grid>
       </Container>
-      <Footer />
     </>
   );
 }
