@@ -17,6 +17,11 @@ import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import WineCard from "../components/WineCard";
+
+import IconButton from "@mui/material/IconButton";
+import InfoIcon from "@mui/icons-material/Info";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import { UserStateContext } from "../App";
 import * as Api from "../api";
 import Footer from "../components/Footer";
@@ -25,12 +30,23 @@ export default function DetailPage() {
   const params = useParams();
   const [data, setData] = useState();
   const { user } = useContext(UserStateContext);
+  const [isLiked, setisLiked] = useState("000000" );
 
   useEffect(() => {
     Api.get(`detail/${params.index}`).then(res => {
       setData(res.data);
     });
   }, [params]);
+  
+  const likeHandler = () => {
+    console.log(user);
+    console.log(data?.result?.[0]);
+    setisLiked(isLiked=="rgba(215, 25, 235, 0.54)"?"000000":"rgba(215, 25, 235, 0.54)");
+    Api.post(`detail/${params.index}`, {
+    user_id: user.id,
+    
+    }).then(res => {});
+    };
 
   const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -105,6 +121,9 @@ export default function DetailPage() {
             </Box>
           </Grid>
 
+         
+                  
+
           <Grid item xs="6">
             <Box
               component="div"
@@ -118,7 +137,16 @@ export default function DetailPage() {
                 <p>설명: {data?.result?.[0]["description"]}</p>
                 <p>가격: ${data?.result?.[0]["price"]}</p>
                 <p>원산지: {data?.result?.[0]["country"]}</p>
+                <IconButton
+                    
+                    sx={{color:isLiked}}                  
+                    onClick={likeHandler}
+                  >
+                    <FavoriteIcon />
+                  </IconButton>
               </div>
+                  
+                
             </Box>
           </Grid>
         </Grid>
@@ -170,12 +198,16 @@ export default function DetailPage() {
             </Box>
           </Grid>
         </Grid>
+        
         <Grid>
           {" "}
           <h2>{data?.result?.[0]["title"]}과 잘 어울리는 안주</h2>
         </Grid>
+
         <Grid container xs={12} spacing={1}>
-          <Grid
+          
+        
+        <Grid
             item
             xs={4}
             sx={{ border: "1px solid lightgray", p: 2 }}

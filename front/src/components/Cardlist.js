@@ -7,6 +7,7 @@ import ListSubheader from "@mui/material/ListSubheader";
 import IconButton from "@mui/material/IconButton";
 import InfoIcon from "@mui/icons-material/Info";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import EmailIcon from '@mui/icons-material/Email';
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -34,7 +35,7 @@ export default function Cardlist({ item }) {
             <CardActions>
               {
                 <IconButton
-                  sx={{ color: "rgba(215, 25, 235, 0.54)" }}
+                  sx={{ color: "#000000" }}
                   target="_blank"
                   href={item.github}
                 >
@@ -43,11 +44,11 @@ export default function Cardlist({ item }) {
               }
               {
                 <IconButton
-                  sx={{ color: "rgba(25, 25, 255, 0.54)" }}
+                  sx={{ color: "#3366CC" }}
                   target="_blank"
                   href={item.email}
                 >
-                  <GitHubIcon />
+                  <EmailIcon />
                 </IconButton>
               }
             </CardActions>

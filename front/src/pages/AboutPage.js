@@ -28,7 +28,7 @@ export default function AboutPage() {
     {
       img: "logo512.png",
       title: "노서현",
-      author: "BE",
+      author: "FE",
       github: "https://github.com/Seohyun-Roh",
       email: "mailto:radult951@gmail.com",
       rows: 2,
@@ -48,7 +48,7 @@ export default function AboutPage() {
     {
       img: "logo512.png",
       title: "명하준",
-      author: "BE",
+      author: "FE",
       github: "https://github.com/hajun-myoung",
       email: "mailto:fe.denver@gmail.com",
       rows: 2,
@@ -58,7 +58,7 @@ export default function AboutPage() {
     {
       img: "logo512.png",
       title: "김효진",
-      author: "BE",
+      author: "FE",
       github: "https://github.com/mineet",
       email: "mailto:bearn47@gmail.com",
       rows: 2,
@@ -70,10 +70,10 @@ export default function AboutPage() {
   return (
     <>
       <Header />
-      <Grid container>
-        {itemData.map(item => {
-          return <Cardlist item={item}></Cardlist>;
-        })}
+    <Grid container>
+      {itemData.map(item => {
+        return <Cardlist item={item}></Cardlist>;
+      })}
       </Grid>
     </>
   );
