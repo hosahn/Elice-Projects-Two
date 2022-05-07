@@ -27,7 +27,7 @@ export default function Cardlist({ item }) {
                 component="img"
                 height="140"
                 image={item.img}
-                alt="green iguana"
+                
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
@@ -42,7 +42,7 @@ export default function Cardlist({ item }) {
                   <IconButton
                     sx={{ color: "rgba(215, 25, 235, 0.54)" }}
                     target="_blank"
-                    href={item.something}
+                    href={item.github}
                   >
                     <GitHubIcon />
                   </IconButton>
@@ -51,7 +51,7 @@ export default function Cardlist({ item }) {
                   <IconButton
                     sx={{ color: "rgba(25, 25, 255, 0.54)" }}
                     target="_blank"
-                    href={item.github}
+                    href={item.email}
                   >
                     <GitHubIcon />
                   </IconButton>
