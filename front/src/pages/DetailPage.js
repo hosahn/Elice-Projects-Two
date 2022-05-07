@@ -155,7 +155,7 @@ export default function DetailPage() {
           <h2>{data?.result?.[0]["title"]}과 비슷한 술</h2>
         </Grid>
         <Grid container xs={12} spacing={1}>
-          <Grid item xs={4} sx={{ border: "1px solid lightgray", p: 2 }}>
+          {/* <Grid item xs={4} sx={{ border: "1px solid lightgray", p: 2 }}>
             <Box
               component="div"
               sx={{ mb: 3.5 }}
@@ -169,8 +169,22 @@ export default function DetailPage() {
               <p>{data?.result?.[0]["similar1"]}</p>
             </Box>
           </Grid>
-          <Grid item xs={4} sx={{ border: "1px solid lightgray", p: 2 }}>
-            <Box
+          <Grid item xs={4} sx={{ border: "1px solid lightgray", p: 2 }}> */}
+          
+          <Grid container xs={12} spacing={1}>
+            {data?.similar?.map((wineImage, idx) => {
+              
+              return (
+                <Grid key={`world-wine-${idx}`} item xs={4}>
+                  <WineCard wineInfo={{
+                    image: wineImage, 
+                    title: data.result[0][`similar${idx+1}`]
+                    }} />
+                </Grid>
+              );
+            })}
+          </Grid>
+            {/* <Box
               component="div"
               sx={{ mb: 3.5 }}
               style={{ display: "flex", alignItems: "center" }}
@@ -195,8 +209,8 @@ export default function DetailPage() {
                 alt="similar1"
               />
               <p>{data?.result?.[0]["similar1"]}</p>
-            </Box>
-          </Grid>
+            </Box> */}
+          {/* </Grid> */}
         </Grid>
         
         <Grid>
