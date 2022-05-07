@@ -107,7 +107,10 @@ for i in range(wines) :
 
 
 ## 프로젝트 구상도
-[1차발표.pdf](/uploads/def10938bcb814b74ff538d6d40fc2e7/1차발표.pdf)
+
+**클릭하여 20팀의 프로젝트 구상도를 확인해주세요!**
+
+[team20-wine-storyboard__4_.pdf](/uploads/096d6fa48d16acfb4513b13b3de83480/team20-wine-storyboard__4_.pdf)
 
 
 ## 프로젝트 팀원 별 역할
