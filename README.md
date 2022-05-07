@@ -107,7 +107,7 @@ for i in range(wines) :
 
 
 ## 프로젝트 구상도
-
+[1차발표.pdf](/uploads/def10938bcb814b74ff538d6d40fc2e7/1차발표.pdf)
 
 
 ## 프로젝트 팀원 별 역할
