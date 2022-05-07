@@ -17,8 +17,5 @@ app.use(worldRouter);
 app.use(mainRouter);
 app.use(myPageRouter);
 app.use(detailRouter);
-app.use("/a", login_required, (req, res) => {
-  res.send("a");
-}); //로그인 기능 체크용 함수입니다!
 
 export { app };
