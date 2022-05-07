@@ -11,6 +11,7 @@ import * as Api from "../api";
 import Header from "../components/Header";
 import { countryGrades } from "../constants/Country";
 import WineCard from "../components/WineCard";
+import Footer from "../components/Footer";
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
@@ -126,6 +127,7 @@ function MapChart() {
           </Grid>
         )}
       </Container>
+      <Footer />
     </>
   );
 }

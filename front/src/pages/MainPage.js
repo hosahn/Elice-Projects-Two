@@ -17,6 +17,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import WineCard from "../components/WineCard";
 
 import * as Api from "../api";
+import Footer from "../components/Footer";
 
 export default function MainPage() {
   const [priceValue, setPriceValue] = useState([80000, 150000]);
@@ -276,6 +277,7 @@ export default function MainPage() {
           })}
         </Grid>
       </Container>
+      <Footer />
     </>
   );
 }
