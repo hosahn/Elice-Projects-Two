@@ -111,11 +111,12 @@ for i in range(wines) :
 **클릭하여 20팀의 프로젝트 구상도를 확인해주세요!**
 
 01 팀 스토리보드
+
 [team20-wine-storyboard__4_.pdf](/uploads/096d6fa48d16acfb4513b13b3de83480/team20-wine-storyboard__4_.pdf)
 
 02 팀 피그마
-[team20-wine-figma](https://www.figma.com/file/WMveIvBqwsV9MJJodnU4wR/Wireframe?node-id=0%3A1)
 
+[team20-wine-figma](https://www.figma.com/file/WMveIvBqwsV9MJJodnU4wR/Wireframe?node-id=0%3A1)
 
 ## 프로젝트 팀원 별 역할
 | 이름 | 담당 업무 |
