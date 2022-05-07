@@ -44,13 +44,16 @@ export default function WineCard({ wineInfo }) {
             </Button>
           </CardActions>
         </Grid>
-        <Grid item xs={3}>
-          <img
-            style={{ width: "100%" }}
-            src={process.env.PUBLIC_URL + wineInfo.image}
-            alt={wineInfo.title}
-          />
-        </Grid>
+        <Grid
+          item
+          xs={3}
+          sx={{
+            backgroundImage: `url(${process.env.PUBLIC_URL + wineInfo.image})`,
+            backgroundSize: "contain",
+            backgroundPosition: "50% 50%",
+            backgroundRepeat: "no-repeat",
+          }}
+        ></Grid>
       </Grid>
     </React.Fragment>
   );
