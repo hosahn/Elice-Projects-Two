@@ -1,4 +1,4 @@
-import { useEffect, useReducer, createContext } from "react";
+import { useEffect, useReducer, createContext, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { loginReducer } from "./reducer";
@@ -19,6 +19,7 @@ function App() {
   const [userState, dispatch] = useReducer(loginReducer, {
     user: null,
   });
+  const [isFetchCompleted, setIsFetchCompleted] = useState(false);
 
   const fetchCurrentUser = async () => {
     try {
@@ -33,12 +34,18 @@ function App() {
       });
     } catch {
       console.log("%c SessionStorage에 토큰 없음.", "color: #d93d1a;");
+    } finally {
+      setIsFetchCompleted(true);
     }
   };
 
   useEffect(() => {
     fetchCurrentUser();
   }, []);
+
+  if (!isFetchCompleted) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <DispatchContext.Provider value={dispatch}>
