@@ -17,6 +17,11 @@ import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import WineCard from "../components/WineCard";
+
+import IconButton from "@mui/material/IconButton";
+import InfoIcon from "@mui/icons-material/Info";
+import GitHubIcon from "@mui/icons-material/GitHub";
+
 import { UserStateContext } from "../App";
 import * as Api from "../api";
 
@@ -30,6 +35,16 @@ export default function DetailPage() {
       setData(res.data);
     });
   }, [params]);
+  
+  const likeHandler = () => {
+    console.log(user);
+    console.log(data?.result?.[0]);
+    Api.post(`detail/${params.index}`, {
+    user_id: user.id,
+    
+    }).then(res => {});
+    };
+
 
   const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -104,7 +119,13 @@ export default function DetailPage() {
             </Box>
           </Grid>
 
-          {/* <button onClick={likeHandler}>좋아요</button> */}
+          {/* <button >좋아요</button>  */}
+                  <IconButton
+                    sx={{ color: "rgba(215, 25, 235, 0.54)" }}
+                    onClick={likeHandler}
+                  >
+                    <GitHubIcon />
+                  </IconButton>
 
           <Grid item xs="6">
             <Box
@@ -120,6 +141,8 @@ export default function DetailPage() {
                 <p>가격: ${data?.result?.[0]["price"]}</p>
                 <p>원산지: {data?.result?.[0]["country"]}</p>
               </div>
+                  
+                
             </Box>
           </Grid>
         </Grid>
@@ -185,7 +208,7 @@ export default function DetailPage() {
           >
             <div>
               <img
-                src="https://cdn.pixabay.com/photo/2016/05/17/09/27/fruit-1397736__480.jpg"
+                src={data?.result?.[0]["snackImage1"]}
                 alt="snack2"
                 style={{ width: "200px", height: "300px" }}
               />
@@ -197,7 +220,7 @@ export default function DetailPage() {
           <Grid item xs={4} sx={{ border: "1px solid lightgray", p: 2 }}>
             <div>
               <img
-                src="https://cdn.pixabay.com/photo/2016/05/17/09/27/fruit-1397736__480.jpg"
+                src={data?.result?.[0]["snackImage1"]}
                 alt="snack2"
                 style={{ width: "200px", height: "300px" }}
               />
