@@ -103,6 +103,12 @@ export default function MainPage() {
     },
   ];
 
+  useEffect(() => {
+    Api.get("main").then(res => {
+      setWineInfos(res.data);
+    });
+  }, []);
+
   const handleChange = (e, newValue) => {
     if (e.target.name === "price") {
       setPriceValue(newValue);
@@ -262,6 +268,7 @@ export default function MainPage() {
                     location: wine.region_1,
                     type: wine.keyword.join(" "),
                     description: wine.description,
+                    index: wine.index,
                   }}
                 />
               </Grid>
