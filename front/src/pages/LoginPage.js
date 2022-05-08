@@ -7,7 +7,8 @@ import Header from "../components/Header";
 import Alert from "../components/Alert";
 import { DispatchContext } from "../App";
 
-import "./index.css"
+import "../styles/login.css";
+import Footer from "../components/Footer";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -69,7 +70,8 @@ export default function LoginPage() {
       <div
         className="signin-container"
         style={{
-          backgroundImage: "url(" + process.env.PUBLIC_URL + "/wine-background.jpg)",
+          backgroundImage:
+            "url(" + process.env.PUBLIC_URL + "/wine-background.jpg)",
         }}
       >
         <form
@@ -85,7 +87,7 @@ export default function LoginPage() {
             <Typography
               variant="h4"
               component="div"
-              style={{ marginBottom: "30px", color: "#FFF"}}
+              style={{ marginBottom: "30px", color: "#FFF" }}
             >
               Login
             </Typography>
@@ -93,25 +95,29 @@ export default function LoginPage() {
               label="email"
               type="email"
               onChange={e => handleValueChange("email", e.target.value)}
-              sx={{backgroundColor: "#FFF", borderRadius: "4px"}}
+              sx={{ backgroundColor: "#FFF", borderRadius: "4px" }}
             ></TextField>
             <br />
             <TextField
               label="pw"
               type="password"
               onChange={e => handleValueChange("password", e.target.value)}
-              sx={{backgroundColor: "#FFF", borderRadius: "4px"}}
+              sx={{ backgroundColor: "#FFF", borderRadius: "4px" }}
             ></TextField>
             <br />
             <Button variant="contained" type="submit">
               Login
             </Button>
-            <Link to="/user/register" style={{ marginTop: "10px", color: "#FFF" }}>
+            <Link
+              to="/user/register"
+              style={{ marginTop: "10px", color: "#FFF" }}
+            >
               회원이 아니신가요?
             </Link>
           </div>
         </form>
       </div>
+      <Footer />
     </>
   );
 }

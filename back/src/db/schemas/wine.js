@@ -69,7 +69,7 @@ const WineSchema = new Schema(
     },
   },
 
-  { collection: "wine" },
+  { collection: "wineCopy" },
 );
 const WineModel = model("wine", WineSchema);
 export { WineModel };
