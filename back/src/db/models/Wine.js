@@ -8,17 +8,7 @@ class Wine {
 
   // * /main -> 데이터 6개를 랜덤하게 받아오기
   static async getSixofRandWines() {
-    const wines = await WineModel.aggregate([{ $sample: { size: 6 } }]);
-    return wines.map(({ index, title, price, points, image, keyword }) => {
-      return {
-        index,
-        title,
-        price,
-        points,
-        image,
-        keyword,
-      };
-    });
+    return await WineModel.aggregate([{ $sample: { size: 6 } }]);
   }
 
   // * /main/search -> 조건에 따른 데이터 6개 받아오기

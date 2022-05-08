@@ -1,22 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
-import Header from "../components/Header";
-import { useParams, NavLink } from "react-router-dom";
-import {
-  Box,
-  Checkbox,
-  Container,
-  FormControlLabel,
-  FormLabel,
-  Grid,
-  Slider,
-  Tooltip,
-  Input,
-} from "@mui/material";
-import { styled, alpha } from "@mui/material/styles";
-import SearchIcon from "@mui/icons-material/Search";
-import InputBase from "@mui/material/InputBase";
-import WineCard from "../components/WineCard";
+import { useParams } from "react-router-dom";
+import { Box, Card, Container, Grid, IconButton } from "@mui/material";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import IconButton from "@mui/material/IconButton";
 import InfoIcon from "@mui/icons-material/Info";
@@ -24,11 +9,12 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { UserStateContext } from "../App";
 import * as Api from "../api";
+import Header from "../components/Header";
+import WineCard from "../components/WineCard";
 import Footer from "../components/Footer";
 
 export default function DetailPage() {
   const params = useParams();
-  const [data, setData] = useState();
   const { user } = useContext(UserStateContext);
   const [isLiked, setisLiked] = useState("000000");
 
@@ -71,159 +57,133 @@ export default function DetailPage() {
   return (
     <>
       <Header />
-      <Container
-        maxWidth="lg"
-        style={{ marginTop: "20px" }}
-        component="div"
-        xs="1"
-      >
+      <Container maxWidth="lg" style={{ marginTop: "50px" }} component="div">
         <Grid
           container
           component="div"
           sx={{ border: "1px solid lightgray", p: 3 }}
+          style={{ marginBottom: "40px" }}
           spacing={3}
         >
           <Grid
             item
-            xs="4"
+            xs={4}
             component="div"
-            sx={{ mb: 3, borderRight: "1px grey solid" }}
+            sx={{
+              borderRight: "1px grey solid",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
           >
             <Box
               component="div"
-              sx={{ mb: 3.5 }}
-              style={{ display: "flex", alignItems: "center" }}
-              spacing={4}
+              sx={{ mr: 3.5 }}
+              style={{
+                maxWidth: "300px",
+                maxHeight: "500px",
+              }}
             >
-              <div>
-                <img src={data?.result?.[0]["image"]} alt="mainImage" />
-              </div>
+              <img src={data?.["image"]} alt="detailImage" />
             </Box>
           </Grid>
 
-          <Grid item xs="6">
-            <Box
-              component="div"
-              sx={{ mb: 3.5 }}
-              style={{ display: "flex", alignItems: "center" }}
-            >
-              <div>
-                <h1>{data?.result?.[0]["title"]}</h1>
-                <br></br>
-                <p>평점: {data?.result?.[0]["points"]}</p>
-                <p>설명: {data?.result?.[0]["description"]}</p>
-                <p>가격: ${data?.result?.[0]["price"]}</p>
-                <p>원산지: {data?.result?.[0]["country"]}</p>
-                <IconButton sx={{ color: isLiked }} onClick={likeHandler}>
+          <Grid item xs={6}>
+            <Box component="div">
+              <h1>{data?.["title"]}</h1>
+              <br></br>
+              <p>평점: {data?.["points"]}</p>
+              <p>설명: {data?.["description"]}</p>
+              <p>가격: ${data?.["price"]}</p>
+              <p>원산지: {data?.["country"]}</p>
+              {user && (
+                <IconButton
+                  style={{
+                    color: isLiked ? "rgba(215, 25, 235, 0.54)" : "#000000",
+                  }}
+                  onClick={likeHandler}
+                >
                   <FavoriteIcon />
                 </IconButton>
-              </div>
+              )}
             </Box>
           </Grid>
         </Grid>
 
-        <Grid>
-          <h2>{data?.result?.[0]["title"]}과 비슷한 술</h2>
-        </Grid>
-        <Grid container xs={12} spacing={1}>
-          {/* <Grid item xs={4} sx={{ border: "1px solid lightgray", p: 2 }}>
-            <Box
-              component="div"
-              sx={{ mb: 3.5 }}
-              style={{ display: "flex", alignItems: "center" }}
-            >
-              <img
-                src={data?.similar?.[0]}
-                style={{ width: "200px", height: "300px" }}
-                alt="similar1"
-              />
-              <p>{data?.result?.[0]["similar1"]}</p>
-            </Box>
-          </Grid>
-          <Grid item xs={4} sx={{ border: "1px solid lightgray", p: 2 }}> */}
+        <h2>{data?.["title"]}과 비슷한 술</h2>
 
-          <Grid container xs={12} spacing={1}>
-            {data?.similar?.map((wine, idx) => {
-              return (
-                <Grid key={`world-wine-${idx}`} item xs={4}>
-                  <WineCard
-                    wineInfo={{
-                      title: wine.title,
-                      image: wine.image,
-                      location: wine.region_1,
-                      type: wine.keyword.join(" "),
-                      description: wine.description,
-                      index: wine.index,
-                    }}
-                  ></WineCard>
-                </Grid>
-              );
-            })}
-          </Grid>
-          {/* <Box
-              component="div"
-              sx={{ mb: 3.5 }}
-              style={{ display: "flex", alignItems: "center" }}
-            >
-              <img
-                src={data?.similar?.[1]}
-                style={{ width: "200px", height: "300px" }}
-                alt="similar1"
-              />
-              <p>{data?.result?.[0]["similar1"]}</p>
-            </Box>
-          </Grid>
-          <Grid item xs={4} sx={{ border: "1px solid lightgray", p: 2 }}>
-            <Box
-              component="div"
-              sx={{ mb: 3.5 }}
-              style={{ display: "flex", alignItems: "center" }}
-            >
-              <img
-                src={data?.similar?.[2]}
-                style={{ width: "200px", height: "300px" }}
-                alt="similar1"
-              />
-              <p>{data?.result?.[0]["similar1"]}</p>
-            </Box> */}
-          {/* </Grid> */}
+        <Grid
+          container
+          component="div"
+          sx={{ p: 3 }}
+          spacing={2}
+          style={{ margin: "10px 0" }}
+        >
+          {similar?.map((wine, idx) => {
+            return (
+              <Grid key={`world-wine-${idx}`} item xs={4}>
+                <WineCard wineInfo={wine} />
+              </Grid>
+            );
+          })}
         </Grid>
 
-        <Grid>
-          {" "}
-          <h2>{data?.result?.[0]["title"]}과 잘 어울리는 안주</h2>
-        </Grid>
+        <h2>{data?.["title"]}과 잘 어울리는 안주</h2>
 
-        <Grid container xs={12} spacing={1}>
-          <Grid
-            item
-            xs={4}
-            sx={{ border: "1px solid lightgray", p: 2 }}
-            style={{ display: "flex", alignItems: "center" }}
-          >
-            <div>
+        <Grid
+          container
+          component="div"
+          sx={{ p: 3 }}
+          spacing={2}
+          style={{ margin: "10px 0" }}
+        >
+          <Grid item xs={4}>
+            <Card
+              item
+              sx={{ border: "1px solid lightgray" }}
+              style={{
+                width: "330px",
+                height: "300px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
               <img
-                src={data?.result?.[0]["snackImage1"]}
+                src={data?.["snackImage1"]}
+                alt="snack1"
+                style={{ width: "180px", height: "200px" }}
+              />
+
+              <p>{data?.["snack1"]}</p>
+            </Card>
+          </Grid>
+
+          <Grid item xs={4}>
+            <Card
+              item
+              sx={{ border: "1px solid lightgray" }}
+              style={{
+                width: "330px",
+                height: "300px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <img
+                src={data?.["snackImage2"]}
                 alt="snack2"
-                style={{ width: "200px", height: "300px" }}
+                style={{ width: "180px", height: "200px" }}
               />
-
-              <p>{data?.result?.[0]["snack1"]}</p>
-            </div>
-          </Grid>
-
-          <Grid item xs={4} sx={{ border: "1px solid lightgray", p: 2 }}>
-            <div>
-              <img
-                src={data?.result?.[0]["snackImage2"]}
-                alt="snack2"
-                style={{ width: "200px", height: "300px" }}
-              />
-              <p>{data?.result?.[0]["snack2"]}</p>
-            </div>
+              <p>{data?.["snack2"]}</p>
+            </Card>
           </Grid>
         </Grid>
       </Container>
+      <Footer />
     </>
   );
 }

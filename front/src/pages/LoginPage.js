@@ -7,7 +7,7 @@ import Header from "../components/Header";
 import Alert from "../components/Alert";
 import { DispatchContext } from "../App";
 
-import "./index.css";
+import "../styles/login.css";
 import Footer from "../components/Footer";
 
 export default function LoginPage() {
